@@ -25,7 +25,7 @@ export default ({ command }: ConfigEnv): UserConfig => {
         exclude: ['path'],
       },
       esbuild: {
-        jsxInject: `import React from 'react'`
+        // jsxInject: `import React from 'react'`
       }
     };
   }
@@ -49,7 +49,7 @@ export default ({ command }: ConfigEnv): UserConfig => {
         exclude: ['path'],
       },
       esbuild: {
-        jsxInject: `import React from 'react'`
+        // jsxInject: `import React from 'react'`
       }
     };
   }

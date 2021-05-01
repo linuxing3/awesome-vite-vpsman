@@ -1,11 +1,3 @@
-// import { defineConfig } from 'vite'
-// import reactRefresh from '@vitejs/plugin-react-refresh'
-
-// // https://vitejs.dev/config/
-// export default defineConfig({
-//   plugins: [reactRefresh()]
-// })
-
 import reactRefresh from '@vitejs/plugin-react-refresh';
 import { UserConfig, ConfigEnv } from 'vite';
 import { join } from 'path';
@@ -32,6 +24,9 @@ export default ({ command }: ConfigEnv): UserConfig => {
       optimizeDeps: {
         exclude: ['path'],
       },
+      esbuild: {
+        jsxInject: `import React from 'react'`
+      }
     };
   }
   // PROD
@@ -53,6 +48,9 @@ export default ({ command }: ConfigEnv): UserConfig => {
       optimizeDeps: {
         exclude: ['path'],
       },
+      esbuild: {
+        jsxInject: `import React from 'react'`
+      }
     };
   }
 };

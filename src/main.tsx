@@ -2,7 +2,7 @@ import React from 'react'
 import dva from 'dva'
 import App from './App'
 import models from './models'
-import './index.css'
+import './sytles/index.css'
 
 // 生成dva app
 const app = dva();

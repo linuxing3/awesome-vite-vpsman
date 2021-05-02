@@ -2,16 +2,24 @@ import { Model } from 'dva'
 
 const app: Model = {
   namespace: 'app',
-  state: [],
+  state: {
+    color: 'blue',
+    theme: 'dark',
+    author: {
+      name: 'linuxing3'
+    }
+  },
   reducers: {
-    add(state, { payload: data }) {
-      return [...state, data];
+    set(state, { payload: data }) {
+      return {...state, ...data};
     },
   },
   effects: {
-    *save({ payload: data }, { put, call }) {
-      yield call(()=>{}, data);
-      yield put({ type: 'add', payload: data });
+    *setTheme({ payload: theme }, { put }) {
+      yield put({ type: 'set', payload: { theme } });
+    },
+    *setColor({ payload: color }, { put }) {
+      yield put({ type: 'set', payload: { color } });
     },
   },
   subscriptions: {

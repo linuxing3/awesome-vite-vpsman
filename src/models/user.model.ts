@@ -36,7 +36,7 @@ const user: Model = {
       // 跳转
       yield put({ type: 'save', payload: { data: userResp.data } });
       console.log('Redirecting to profile page...');
-      yield put(routerRedux.goBack());
+      yield put(routerRedux.push('/profile'));
     },
     *logout({ payload: value }, { call, put }) {
       // 模拟网络请求
@@ -47,7 +47,7 @@ const user: Model = {
         payload: { data: defaultState }
       });
       console.log('Redirecting to home page...');
-      yield put(routerRedux.push("/"));
+      yield put(routerRedux.push('/'));
     }
   },
   subscriptions: {

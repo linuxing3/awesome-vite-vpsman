@@ -1,18 +1,19 @@
 import React from 'react';
 import Switch from './routes';
-import { routerRedux } from 'dva/router';
-import createBrowserHistory from 'history/createBrowserHistory';
+import { RouteComponentProps, routerRedux } from 'dva/router';
+import { SubscriptionAPI } from 'dva';
 import NavBar from './components/Navbar';
 
-const { ConnectedRouter } = routerRedux;
-const history = createBrowserHistory();
+export interface Props extends RouteComponentProps {}
 
-export default function App() {
+const { ConnectedRouter } = routerRedux;
+
+export default function App(props: Props & SubscriptionAPI) {
 
   let avatarUrl = localStorage.getItem('avatarUrl') || 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 
   return (
-    <ConnectedRouter history={history}>
+    <ConnectedRouter history={props.history}>
       <div>
         <NavBar avatarUrl={avatarUrl} />
         <main>

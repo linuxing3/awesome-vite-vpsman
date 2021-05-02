@@ -1,20 +1,33 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import Avatar from '../components/Avatar';
+import Avatar, { AvatarProps } from '../components/Avatar';
 
 export default {
   title: 'Component/Avatar',
   component: Avatar,
   argTypes: {
-    backgroundColor: { control: 'color' },
+    width: { control: 'color' },
+    height: { control: 'color' },
   },
 } as Meta;
 
-const Template: Story = (args) => <Avatar {...args} />;
+const Template: Story<AvatarProps> = (args) => <Avatar {...args} />;
 
-export const Album = Template.bind({});
-Album.args = {
-  primary: true,
-  label: 'Button',
+export const Small = Template.bind({});
+Small.args = {
+  width: 'w-6',
+  height: 'h-6',
+};
+
+export const Medium = Template.bind({});
+Medium.args = {
+  width: 'w-8',
+  height: 'h-8',
+};
+
+export const Large = Template.bind({});
+Large.args = {
+  width: 'w-10',
+  height: 'h-10',
 };

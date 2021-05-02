@@ -18,6 +18,7 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/solid'
+import { classNames } from '../utils'
 
 const solutions = [
   {
@@ -76,10 +77,6 @@ const recentPosts = [
   { id: 2, name: 'How to use search engine optimization to drive traffic to your site', href: '#' },
   { id: 3, name: 'Improve your customer experience', href: '#' },
 ]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 
 export default function SolutionDropdown() {
   return (
@@ -181,6 +178,7 @@ export default function SolutionDropdown() {
                   Docs
                 </a>
 
+                {/* More Dropdown */}
                 <Popover className="relative">
                   {({ open }) => (
                     <>
@@ -259,6 +257,7 @@ export default function SolutionDropdown() {
                   )}
                 </Popover>
               </Popover.Group>
+              {/* sign in and sign up button */}
               <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
                 <a href="#" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
                   Sign in
@@ -270,6 +269,7 @@ export default function SolutionDropdown() {
                   Sign up
                 </a>
               </div>
+              {/* end signin button */}
             </div>
           </div>
 

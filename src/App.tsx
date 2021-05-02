@@ -1,14 +1,15 @@
 import React from 'react';
 import Switch from './routes';
-import { Router } from 'react-router';
+import { routerRedux } from 'dva/router';
 import createBrowserHistory from 'history/createBrowserHistory';
 import NavBar from './components/Navbar';
 
+const { ConnectedRouter } = routerRedux;
 const history = createBrowserHistory();
 
 export default function App() {
   return (
-    <Router history={history}>
+    <ConnectedRouter history={history}>
       <div>
         <NavBar />
         <main>
@@ -23,6 +24,6 @@ export default function App() {
           </div>
         </main>
       </div>
-    </Router>
+    </ConnectedRouter>
   );
 }

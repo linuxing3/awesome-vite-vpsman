@@ -1,5 +1,9 @@
-import AppModel from './app'
+import app from './app.model'
+import user from './user.model'
+import order from './order.model'
 
 export default [
-  AppModel
+  app,
+  user,
+  order
 ]

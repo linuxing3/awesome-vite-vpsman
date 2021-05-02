@@ -1,17 +1,17 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import SolutionDropdown from '../components/SolutionDropdown';
+import Dropdown from '../components/Dropdown';
 
 export default {
-  title: 'Component/SolutionDropdown',
-  component: SolutionDropdown,
+  title: 'Component/Dropdown',
+  component: Dropdown,
   argTypes: {
     backgroundColor: { control: 'color' },
   },
 } as Meta;
 
-const Template: Story = (args) => <SolutionDropdown {...args} />;
+const Template: Story = (args) => <Dropdown {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {

@@ -1,23 +1,13 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ]
-  }
-  ```
-*/
 import React from 'react'
+import { connect } from 'dva';
 import { LockClosedIcon } from '@heroicons/react/solid'
 
-export default function LoginForm() {
+function LoginForm({login}) {
+
+  const Login = (values) => {
+    login(values);
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -104,3 +94,17 @@ export default function LoginForm() {
     </div>
   )
 }
+
+function ms(state) {
+  return state.user;
+}
+
+function mp(dispatch) {
+  return {
+    login(loginInfo) {
+      dispatch({ type: 'user/login', payload: loginInfo });
+    }
+  };
+}
+
+export default connect(ms, mp)(LoginForm);

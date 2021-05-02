@@ -38,10 +38,15 @@ const GITHUB_USER_QUERY = `
   query UnnamedQuery {
     gitHub {
       user(login: "linuxing3") {
+        avatarUrl
         login
         name
         email
-        avatarUrl
+        bio
+        websiteUrl
+        status {
+          id
+        }
       }
     }
   }

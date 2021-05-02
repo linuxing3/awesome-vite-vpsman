@@ -57,7 +57,7 @@ const Project = ({ username }) => {
                 <div className='flex-shrink-0 h-10 w-10'>
                   <img
                     className='h-10 w-10 rounded-full'
-                    src={userInfo ? userInfo.data.avatarUrl : people[0].image}
+                    src={userInfo ? userInfo.data.avatarUrl : ''}
                     alt=''
                   />
                 </div>

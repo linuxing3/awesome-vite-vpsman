@@ -10,31 +10,29 @@ export default ({ command }: ConfigEnv): UserConfig => {
     return {
       base: '/',
       plugins: [reactRefresh()],
-      alias: {
-      },
       resolve: {
         alias: {
-          '/@': srcRoot,
-        },
+          '/@': srcRoot
+        }
       },
       build: {
         outDir: join(srcRoot, '/out'),
         emptyOutDir: true,
-        rollupOptions: {},
+        rollupOptions: {}
       },
       server: {
         port: process.env.PORT === undefined ? 3000 : +process.env.PORT,
         proxy: {
           // 如果是 /api 打头，则访问地址如下
-          "/api": {
-          target: "http://pro.gce.xunqinji.xyz:8887",
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, '')
+          '/api': {
+            target: 'http://pro.gce.xunqinji.xyz:8887',
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/api/, '')
           }
-        },
+        }
       },
       optimizeDeps: {
-        exclude: ['path'],
+        exclude: ['path']
       },
       esbuild: {
         // jsxInject: `import React from 'react'`
@@ -46,19 +44,29 @@ export default ({ command }: ConfigEnv): UserConfig => {
     return {
       base: `${__dirname}/src/out/`,
       plugins: [reactRefresh()],
-      alias: {
-        '/@': srcRoot,
-      },
       build: {
         outDir: join(srcRoot, '/out'),
         emptyOutDir: true,
-        rollupOptions: {},
+        rollupOptions: {}
+      },
+      resolve: {
+        alias: {
+          '/@': srcRoot
+        }
       },
       server: {
         port: process.env.PORT === undefined ? 3000 : +process.env.PORT,
+        proxy: {
+          // 如果是 /api 打头，则访问地址如下
+          '/api': {
+            target: 'http://pro.gce.xunqinji.xyz:8887',
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/api/, '')
+          }
+        }
       },
       optimizeDeps: {
-        exclude: ['path'],
+        exclude: ['path']
       },
       esbuild: {
         // jsxInject: `import React from 'react'`

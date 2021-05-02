@@ -1,4 +1,4 @@
-import ajax from '../utils/fetch';
+import ajax from '../utils/request';
 const prev = '/api';
 export interface LoginParamsType {
   type: number;

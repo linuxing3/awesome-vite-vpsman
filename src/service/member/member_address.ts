@@ -1,39 +1,17 @@
-import ajax from '../../utils/fetch';
+import request from '../../utils/request';
 
 export async function queryAddress(params?: Member.AddressTableListParams) {
-  return ajax('/api/member/address/list', {
-    method: 'POST',
-    data: {
-      ...params,
-    },
-  });
+  return request('/api/member/address/list', {...params}, 'POST')
 }
 
 export async function removeAddress(params: { ids: number[] }) {
-  return ajax('/api/member/address/delete', {
-    method: 'POST',
-    data: {
-      ...params,
-    },
-  });
+  return request('/api/member/address/delete', {...params}, 'POST')
 }
 
 export async function addAddress(params: Member.AddressTableListItem) {
-  return ajax('/api/member/address/add', {
-    method: 'POST',
-    data: {
-      ...params,
-    },
-  });
+  return request('/api/member/address/add', {...params}, 'POST')
 }
 
 export async function updateAddress(params: Member.AddressTableListItem) {
-  return ajax('/api/member/address/update', {
-    method: 'POST',
-    data: {
-      ...params,
-    },
-  });
+  return request('/api/member/address/update', {...params }, 'POST')
 }
-
-

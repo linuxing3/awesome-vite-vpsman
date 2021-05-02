@@ -5,8 +5,10 @@ import App from './App';
 import models from './models';
 import './styles/index.css';
 
+//@ts-ignore
+let test = dva.default || dva;
 // 生成dva app
-const app = dva({
+const app = test({
   history: createBrowserHistory(),
 });
 

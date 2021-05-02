@@ -42,7 +42,7 @@ export default ({ command }: ConfigEnv): UserConfig => {
   // PROD
   else {
     return {
-      base: `/`,
+      base: `./`,
       plugins: [reactRefresh()],
       build: {
         outDir: join(srcRoot, '/out'),

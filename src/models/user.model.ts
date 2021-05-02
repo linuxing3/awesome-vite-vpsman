@@ -30,13 +30,28 @@ const user: Model = {
     *login({ payload: value }, { call, put }) {
       // 模拟网络请求
       console.log('Login...');
-      const userResp = yield call(userService.loginUser, value, 'POST');
+      try {
+        const userResp = yield call(userService.loginUser, value, 'POST');
+        console.log(userResp);
+        localStorage.setItem('access_token', userResp.data.access_token);
+        // 跳转
+        yield put({ type: 'save', payload: { data: userResp.data } });
+        console.log('Redirecting to profile page...');
+        yield put(routerRedux.push('/profile'));
+      } catch (error) {
+        yield call(userService.registerUser, value, 'POST');
+        yield put(routerRedux.push('/login'));
+      }
+    },
+    *register({ payload: value }, { call, put }) {
+      // 模拟网络请求
+      console.log('Register...');
+      const userResp = yield call(userService.registerUser, value, 'POST');
       console.log(userResp);
-      localStorage.setItem('access_token', userResp.data.access_token);
       // 跳转
       yield put({ type: 'save', payload: { data: userResp.data } });
-      console.log('Redirecting to profile page...');
-      yield put(routerRedux.push('/profile'));
+      console.log('Redirecting to login...');
+      yield put(routerRedux.push('/login'));
     },
     *logout({ payload: value }, { call, put }) {
       // 模拟网络请求

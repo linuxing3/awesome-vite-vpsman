@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'dva';
 import { LockClosedIcon } from '@heroicons/react/solid';
 
-import { addMember } from "../../service/member/member";
+import { addMember, updateMember } from '../../service/member/member';
 
 const sampleMember = {
   id: 14,
@@ -24,11 +24,12 @@ const sampleMember = {
   growth: 20,
   luckey_count: 1000,
   history_integration: 1000
-}
+};
 
 function MemberForm() {
-
   const [values, setValues] = useState<Member.MemberItem>(sampleMember);
+
+  const [isUpdate, setIsUpdate] = useState(false);
 
   const handleUsernameChange = (e) => {
     e.persist();
@@ -46,14 +47,34 @@ function MemberForm() {
     }));
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(values);
+    if (isUpdate) {
+      handleUpdate(values);
+    } else {
+      try {
+        addMember(values);
+        window.location.href = '/member/list'
+        return true;
+      } catch (error) {
+        console.error('添加会员失败，请重试');
+        window.location.href = '/member/list'
+        return false;
+      }
+    }
+  };
+
+  /**
+   * 更新节点
+   * @param fields
+   */
+  const handleUpdate = async (values: Member.MemberItem) => {
     try {
-      addMember(values);
+      await updateMember(values);
+      return true;
     } catch (error) {
-      alert('添加会员失败，请重试');
+      return false;
     }
   };
 
@@ -105,15 +126,6 @@ function MemberForm() {
             </div>
           </div>
 
-            <div className='text-sm'>
-              <a
-                href='#'
-                className='font-medium text-indigo-600 hover:text-indigo-500'
-              >
-                Forgot your password?
-              </a>
-            </div>
-
           <div>
             <button
               type='submit'
@@ -125,7 +137,7 @@ function MemberForm() {
                   aria-hidden='true'
                 />
               </span>
-              Sign in
+              Add
             </button>
           </div>
         </form>

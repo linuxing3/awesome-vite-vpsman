@@ -1,5 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
+const service = axios.create({
+  baseURL: 'http://pro.gce.xunqinji.xyz:8887'
+})
+
 // data传入必须是对象
 export default function request(url: string, data: object, method = "GET") {
   let promise: Promise<any>;
@@ -14,9 +18,9 @@ export default function request(url: string, data: object, method = "GET") {
   }
 
   if (method === "GET") {
-    promise = axios.get(url, { params: data, headers });
+    promise = service.get(url, { params: data, headers });
   } else {
-    promise = axios.post(url, data, { headers });
+    promise = service.post(url, data, { headers });
   }
 
   return promise

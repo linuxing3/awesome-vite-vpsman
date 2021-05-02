@@ -1,5 +1,5 @@
 import ajax from '../utils/request';
-const prev = '/api';
+const prev = '';
 export interface LoginParamsType {
   type: number;
   mobile: string;
@@ -11,6 +11,11 @@ export interface LoginParamsType {
 }
 
 // 测试
-export const loginUser = async (data: {}, method: string) => ajax(`${prev}/user/login`, data, method);
-export const logoutUser = async (data: {}, method: string) => ajax(`${prev}/user/logout`, data, method);
+export const loginUser = async (data: {}, method: string) =>
+  ajax(`${prev}/user/login`, data, method);
 
+export const logoutUser = async (data: {}, method: string) =>
+  ajax(`${prev}/user/logout`, data, method);
+  
+export const registerUser = async (data: {}, method: string) =>
+  ajax(`${prev}/user/register`, { smscode: '20090909', ...data }, method);

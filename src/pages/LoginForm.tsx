@@ -7,7 +7,8 @@ const LoginMessage: React.FC<{
   content: string;
 }> = ({ content }) => <div>{content}</div>;
 
-function LoginForm({ login }) {
+function LoginForm({ login, signup }) {
+  const [register, setRegister] = useState(false);
 
   const [userLoginState, setUserLoginState] = useState<API.LoginStateType>({
     status: 'error',
@@ -59,12 +60,11 @@ function LoginForm({ login }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(values);
-    try {
+    if (register) {
+      signup(values);
+    } else {
       login(values);
-      setUserLoginState({ status: 'ok'});
-    } catch (error) {
-      alert('登录失败，请重试');
-      setUserLoginState({ status: 'error'});
+      setUserLoginState({ status: 'ok' });
     }
   };
 
@@ -181,13 +181,14 @@ function LoginForm({ login }) {
                   aria-hidden='true'
                 />
               </span>
-              Sign in
+              {register ? 'Sign up' : 'Sign in'}
             </button>
           </div>
 
           {/* login message */}
-          {status === 'error' && loginType === 'mobile' && <LoginMessage content="验证码错误" />}
-
+          {status === 'error' && loginType === 'mobile' && (
+            <LoginMessage content='验证码错误' />
+          )}
         </form>
       </div>
     </div>
@@ -202,6 +203,9 @@ function mp(dispatch) {
   return {
     login(loginInfo) {
       dispatch({ type: 'user/login', payload: loginInfo });
+    },
+    signup(loginInfo) {
+      dispatch({ type: 'user/register', payload: loginInfo });
     }
   };
 }

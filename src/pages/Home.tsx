@@ -3,6 +3,7 @@ import React from 'react';
 import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import Hero from './Hero';
 
 const navigation = [
   { name: 'Product', href: '#' },
@@ -129,7 +130,7 @@ export function MyLogo() {
   );
 }
 
-export default function Home() {
+function Promotion() {
   return (
     <div className='relative bg-white overflow-hidden'>
       <div className='max-w-7xl mx-auto'>
@@ -178,4 +179,8 @@ export default function Home() {
       </div>
     </div>
   );
+}
+
+export default function Home() {
+  return <Hero></Hero>;
 }

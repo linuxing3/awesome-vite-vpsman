@@ -1,26 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   getRespositories,
+  getUserInfo,
   auth,
   urqlClient,
   APP_ID,
-  getUserInfo
+  GithubNode
 } from '../service/github';
-import { Provider } from 'urql';
+import { Provider, useQuery } from 'urql';
 
 const Project = ({ username }) => {
+
   // 获取代码仓库
   const [{ data, fetching, error }, reexecuteQuery] = getRespositories(
     username
   );
+
   // 获取用户信息
   const [userInfo] = getUserInfo(username);
 
   if (fetching) return <pre>Loading...</pre>;
-
-  if (data) {
-    console.log(data);
-  }
 
   const dataEl = data ? (
     <table className='min-w-full divide-y divide-gray-200'>
@@ -50,20 +49,20 @@ const Project = ({ username }) => {
         </tr>
       </thead>
       <tbody className='bg-white divide-y divide-gray-200'>
-        {data.map((project) => (
+        {data.map((project: GithubNode) => (
           <tr key={project.id}>
             <td className='px-6 py-4 whitespace-nowrap'>
               <div className='flex items-center'>
                 <div className='flex-shrink-0 h-10 w-10'>
                   <img
                     className='h-10 w-10 rounded-full'
-                    src={userInfo ? userInfo.data.avatarUrl : ''}
+                    src={userInfo ? userInfo.data?.avatarUrl : ''}
                     alt=''
                   />
                 </div>
                 <div className='ml-4'>
                   <div className='text-sm font-medium text-gray-900'>
-                    {userInfo ? userInfo.data.name : ''}
+                    {userInfo ? userInfo.data?.name : ''}
                   </div>
                 </div>
               </div>
@@ -123,9 +122,9 @@ const Project = ({ username }) => {
       className='text-gray-700 block w-full text-left px-4 py-2 text-xl'
       onClick={async () => {
         if (!needsLoginService) {
+          await auth.login(needsLoginService);
           reexecuteQuery({ requestPolicy: 'cache-and-network' });
         } else {
-          await auth.login(needsLoginService);
           const loginSuccess = await auth.isLoggedIn(needsLoginService);
           if (loginSuccess) {
             console.log('Successfully logged into ' + needsLoginService);

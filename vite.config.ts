@@ -42,7 +42,7 @@ export default ({ command }: ConfigEnv): UserConfig => {
   // PROD
   else {
     return {
-      base: `${__dirname}/src/out/`,
+      base: `/`,
       plugins: [reactRefresh()],
       build: {
         outDir: join(srcRoot, '/out'),
@@ -56,14 +56,6 @@ export default ({ command }: ConfigEnv): UserConfig => {
       },
       server: {
         port: process.env.PORT === undefined ? 3000 : +process.env.PORT,
-        proxy: {
-          // 如果是 /api 打头，则访问地址如下
-          '/api': {
-            target: 'http://pro.gce.xunqinji.xyz:8887',
-            changeOrigin: true,
-            rewrite: (path) => path.replace(/^\/api/, '')
-          }
-        }
       },
       optimizeDeps: {
         exclude: ['path']

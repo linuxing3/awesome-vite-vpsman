@@ -1,37 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Provider } from 'urql';
-import {
-  auth,
-  urqlClient,
-  getUserInfo
-} from '../service/github';
+import { auth, urqlClient, getUserInfo } from '../service/github';
 
 function Profile({ username }) {
   const [userInfo, reexecuteQuery] = getUserInfo(username);
 
   const needsLoginService = auth.findMissingAuthServices(userInfo.error)[0];
 
+  const login = async () => {
+    if (!needsLoginService) {
+      reexecuteQuery({ requestPolicy: 'cache-and-network' });
+    } else {
+      await auth.login(needsLoginService);
+      const loginSuccess = await auth.isLoggedIn(needsLoginService);
+      if (loginSuccess) {
+        console.log('Successfully logged into ' + needsLoginService);
+        reexecuteQuery({ requestPolicy: 'cache-and-network' });
+      } else {
+        console.log('The user did not grant auth to ' + needsLoginService);
+      }
+    }
+  };
+
   const AuthButton = () => (
     <button
       className='text-gray-700 block w-full text-left px-4 py-2 text-xl'
-      onClick={async () => {
-        if (!needsLoginService) {
-          reexecuteQuery({ requestPolicy: 'cache-and-network' });
-        } else {
-          await auth.login(needsLoginService);
-          const loginSuccess = await auth.isLoggedIn(needsLoginService);
-          if (loginSuccess) {
-            console.log('Successfully logged into ' + needsLoginService);
-            reexecuteQuery({ requestPolicy: 'cache-and-network' });
-          } else {
-            console.log('The user did not grant auth to ' + needsLoginService);
-          }
-        }
-      }}
+      onClick={() => login()}
     >
-      {needsLoginService
-        ? `Log in to ${needsLoginService}`
-        : 'Github User'}
+      {needsLoginService ? `Link ${needsLoginService} Account` : 'Github User'}
     </button>
   );
 
@@ -56,7 +52,9 @@ function Profile({ username }) {
                   name='company_website'
                   id='company_website'
                   className='focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300'
-                  placeholder={userInfo ? userInfo.data.websiteUrl: 'example.com'}
+                  placeholder={
+                    userInfo ? userInfo.data.websiteUrl : 'example.com'
+                  }
                 />
               </div>
             </div>
@@ -90,11 +88,13 @@ function Profile({ username }) {
             </label>
             <div className='mt-1 flex items-center'>
               <span className='inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100'>
-                {userInfo ? (<img
+                {userInfo ? (
+                  <img
                     className='h-10 w-10 rounded-full'
                     src={userInfo ? userInfo.data.avatarUrl : ''}
                     alt=''
-                  />) : (
+                  />
+                ) : (
                   <svg
                     className='h-full w-full text-gray-300'
                     fill='currentColor'

@@ -16,6 +16,7 @@ function createWindow() {
     fullscreenable: true,
     webPreferences: {
       preload: join(__dirname, 'preload.js'),
+      webSecurity: false
     },
   });
 

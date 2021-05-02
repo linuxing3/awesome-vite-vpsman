@@ -1,6 +1,7 @@
 /** Created by guangqiang on 2017/12/17. */
 import * as userService from '../service/user';
 import { routerRedux } from 'dva/router';
+import { Model } from 'dva'
 
 const defaultState = {
   auid: 0,
@@ -17,7 +18,7 @@ const defaultState = {
   refresh_after: 0
 };
 
-export default {
+const user: Model = {
   namespace: 'user',
   state: defaultState,
   reducers: {
@@ -34,8 +35,8 @@ export default {
       localStorage.setItem('access_token', userResp.data.access_token);
       // 跳转
       yield put({ type: 'save', payload: { data: userResp.data } });
-      console.log('Redirecting to user page...');
-      yield put(routerRedux.push("/user"));
+      console.log('Redirecting to profile page...');
+      yield put(routerRedux.goBack());
     },
     *logout({ payload: value }, { call, put }) {
       // 模拟网络请求
@@ -53,3 +54,5 @@ export default {
     setup({ dispatch, history }) {}
   }
 };
+
+export default user

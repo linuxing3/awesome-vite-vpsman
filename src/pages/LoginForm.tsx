@@ -1,11 +1,56 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'dva';
 import { LockClosedIcon } from '@heroicons/react/solid'
 
 function LoginForm({login}) {
 
-  const Login = (values) => {
+  const [submitted, setSumitted] = useState(false)
+
+  const [values, setValues] = useState({
+    password: '20090909',
+    email: 'linuxing3@qq.com',
+    mobile: '13901229638',
+    remember: 0,
+    type: 1,
+  })
+
+  const handleEmailChange = (e) => {
+    e.persist()
+    setValues((values) => ({
+      ...values,
+      email: e.target.value
+    }) )
+  }
+
+  const handleMobileChange = (e) => {
+    e.persist()
+    setValues((values) => ({
+      ...values,
+      mobile: e.target.value
+    }) )
+  }
+
+  const handlePasswordChange = (e) => {
+    e.persist()
+    setValues((values) => ({
+      ...values,
+      password: e.target.value
+    }) )
+  }
+
+  const handleRememberChange = (e) => {
+    e.persist()
+    setValues((values) => ({
+      ...values,
+      remember: e.target.value
+    }) )
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(values);
     login(values);
+    // setSumitted(true);
   }
 
   return (
@@ -25,9 +70,24 @@ function LoginForm({login}) {
             </a>
           </p>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit} method="POST">
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
+            <div>
+              <label htmlFor="mobile" className="sr-only">
+                Mobile
+              </label>
+              <input
+                id="mobile"
+                name="mobile"
+                autoComplete="mobile"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Mobile"
+                value={values.mobile}
+                onChange={handleMobileChange}
+              />
+            </div>
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Email address
@@ -40,6 +100,8 @@ function LoginForm({login}) {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
+                value={values.email}
+                onChange={handleEmailChange}
               />
             </div>
             <div>
@@ -54,6 +116,8 @@ function LoginForm({login}) {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
+                value={values.password}
+                onChange={handlePasswordChange}
               />
             </div>
           </div>
@@ -65,6 +129,8 @@ function LoginForm({login}) {
                 name="remember_me"
                 type="checkbox"
                 className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                value={values.remember}
+                onChange={handleRememberChange}
               />
               <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
                 Remember me

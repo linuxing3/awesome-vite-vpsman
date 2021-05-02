@@ -10,7 +10,7 @@ import Profile from '../pages/Profile';
 // A wrapper for <Route> that redirects to the login
 // screen if you're not yet authenticated.
 function PrivateRoute({ children, ...rest }) {
-  localStorage.setItem('access_token', '000');
+  // localStorage.setItem('access_token', '000');
   let token = localStorage.getItem('access_token');
   return (
     <Route

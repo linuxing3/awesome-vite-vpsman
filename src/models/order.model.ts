@@ -1,8 +1,8 @@
 /** Created by guangqiang on 2017/12/17. */
-
+import { Model } from 'dva'
 import * as orderService from '../service/order';
 
-export default {
+const order: Model = {
   namespace: 'order',
   state: {
     list: []
@@ -22,3 +22,5 @@ export default {
     }
   }
 };
+
+export default order;

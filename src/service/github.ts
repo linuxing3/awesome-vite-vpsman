@@ -103,6 +103,8 @@ export const getUserInfo = (username: string): UseQueryResponse<any>  => {
     }
   });
   if (data) {
+    localStorage.setItem('avatarUrl', data.gitHub.user.avatarUrl);
+    localStorage.setItem('loginName', data.gitHub.user.login);
     return [{ data: data.gitHub.user, fetching, error, stale }, reexecuteQuery];
   }
   return [{ data: {}, fetching, error, stale }, reexecuteQuery];

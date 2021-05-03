@@ -71,7 +71,7 @@ export default ({ avatarUrl }) => {
                             {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                             <a
                               href='/'
-                              className='px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-md'
+                              className='px-3 py-2 text-sm font-medium text-white rounded-md'
                             >
                               {item.title}
                             </a>
@@ -91,7 +91,7 @@ export default ({ avatarUrl }) => {
                 </div>
                 <div className='hidden md:block'>
                   <div className='flex items-center ml-4 md:ml-6'>
-                    <button className='p-1 text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
+                    <button className='p-1 text-gray-100 bg-indigo-300 rounded-full hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
                       <span className='sr-only'>View notifications</span>
                       <BellIcon className='w-6 h-6' aria-hidden='true' />
                     </button>

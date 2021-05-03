@@ -43,7 +43,7 @@ const user: Model = {
         yield put(routerRedux.push('/dashboard'));
       }
     },
-    *register({ payload: value }, { call, put }) {
+    *signup({ payload: value }, { call, put }) {
       // 模拟网络请求
       console.log('Register...');
       const userResp = yield call(userService.registerUser, value, 'POST');

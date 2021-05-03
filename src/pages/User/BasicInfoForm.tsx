@@ -9,12 +9,12 @@ const BasicInfoForm = ({ userInfo, handleSubmit }) => {
   const [bio, setBio] = useState((userInfo as GithubUserInfo).bio);
 
   const handleWebsiteChange = (e) => {
-    e.preventDefault();
+    e.persist();
     setWebSite(e.target.value);
   };
 
   const handleBioChange = (e) => {
-    e.preventDefault();
+    e.persist();
     setBio(e.target.value);
   };
 

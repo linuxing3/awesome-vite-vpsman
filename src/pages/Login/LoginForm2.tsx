@@ -69,18 +69,18 @@ function LoginForm({ login, signup }) {
   };
 
   return (
-    <div className='min-h-screen flex items-start justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>
-      <div className='max-w-md w-full space-y-8'>
+    <div className='flex items-start justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8'>
+      <div className='w-full max-w-md space-y-8'>
         <div>
           <img
-            className='mx-auto h-12 w-auto'
+            className='w-auto h-12 mx-auto'
             src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
             alt='Workflow'
           />
-          <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
+          <h2 className='mt-6 text-3xl font-extrabold text-center text-gray-900'>
             Sign in to your account
           </h2>
-          <p className='mt-2 text-center text-sm text-gray-600'>
+          <p className='mt-2 text-sm text-center text-gray-600'>
             Or{' '}
             <a
               href='#'
@@ -92,7 +92,7 @@ function LoginForm({ login, signup }) {
         </div>
         <form className='mt-8 space-y-6' onSubmit={handleSubmit} method='POST'>
           <input type='hidden' name='remember' defaultValue='true' />
-          <div className='rounded-md shadow-sm -space-y-px'>
+          <div className='-space-y-px rounded-md shadow-sm'>
             <div>
               <label htmlFor='mobile' className='sr-only'>
                 Mobile
@@ -102,7 +102,7 @@ function LoginForm({ login, signup }) {
                 name='mobile'
                 autoComplete='mobile'
                 required
-                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                className='relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                 placeholder='Mobile'
                 value={values.mobile}
                 onChange={handleMobileChange}
@@ -118,7 +118,7 @@ function LoginForm({ login, signup }) {
                 type='email'
                 autoComplete='email'
                 required
-                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                className='relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                 placeholder='Email address'
                 value={values.email}
                 onChange={handleEmailChange}
@@ -134,7 +134,7 @@ function LoginForm({ login, signup }) {
                 type='password'
                 autoComplete='current-password'
                 required
-                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                className='relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                 placeholder='Password'
                 value={values.password}
                 onChange={handlePasswordChange}
@@ -148,13 +148,13 @@ function LoginForm({ login, signup }) {
                 id='remember_me'
                 name='remember_me'
                 type='checkbox'
-                className='h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded'
+                className='w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500'
                 value={values.remember}
                 onChange={handleRememberChange}
               />
               <label
                 htmlFor='remember_me'
-                className='ml-2 block text-sm text-gray-900'
+                className='block ml-2 text-sm text-gray-900'
               >
                 Remember me
               </label>
@@ -173,11 +173,11 @@ function LoginForm({ login, signup }) {
           <div>
             <button
               type='submit'
-              className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+              className='relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
             >
-              <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
+              <span className='absolute inset-y-0 left-0 flex items-center pl-3'>
                 <LockClosedIcon
-                  className='h-5 w-5 text-indigo-500 group-hover:text-indigo-400'
+                  className='w-5 h-5 text-indigo-500 group-hover:text-indigo-400'
                   aria-hidden='true'
                 />
               </span>
@@ -195,19 +195,19 @@ function LoginForm({ login, signup }) {
   );
 }
 
-function ms(state) {
+function mapStateToProps(state) {
   return state.user;
 }
 
-function mp(dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
     login(loginInfo) {
       dispatch({ type: 'user/login', payload: loginInfo });
     },
     signup(loginInfo) {
-      dispatch({ type: 'user/register', payload: loginInfo });
+      dispatch({ type: 'user/signup', payload: loginInfo });
     }
   };
 }
 
-export default connect(ms, mp)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

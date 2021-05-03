@@ -5,6 +5,7 @@ import BasicInfoForm from './BasicInfoForm';
 import PersonalInfoForm from './PersonalInfoForm';
 import NotificationForm from './NotificationForm';
 import DividerLine from '../../components/DividerLine';
+import Spinning from '../../components/Spinning';
 
 const defaultUser: { data: GithubUserInfo }= {
   data: {
@@ -25,7 +26,7 @@ const Profile = ({ username }) => {
   const [{ data, fetching, error }, reexecuteQuery] = getUserInfo(username);
 
   // 没有数据时不显示组件
-  if (fetching) return <>Fetching</>
+  if (fetching) return <Spinning />
   
   // 错误时尝试重新登录
   const needsLoginService = auth.findMissingAuthServices(error)[0];

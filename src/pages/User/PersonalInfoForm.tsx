@@ -8,12 +8,12 @@ const PersonalInfoForm = ({ userInfo, handleSubmit }) => {
   const [email, setEmail] = useState((userInfo as GithubUserInfo).email);
 
   const handleUsernameChange = (e) => {
-    e.preventDefault();
+    e.persist();
     setUsername(e.target.value);
   };
 
   const handleEmailChange = (e) => {
-    e.preventDefault();
+    e.persist();
     setEmail(e.target.value);
   };
 

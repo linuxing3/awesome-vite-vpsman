@@ -7,7 +7,8 @@ import {
   APP_ID,
   GithubNode
 } from '../../service/github';
-import { Provider, useQuery } from 'urql';
+import { Provider } from 'urql';
+import Spinning from '../../components/Spinning';
 
 const Project = ({ username }) => {
 
@@ -19,7 +20,7 @@ const Project = ({ username }) => {
   // 获取用户信息
   const [userInfo] = getUserInfo(username);
 
-  if (fetching) return <pre>Loading...</pre>;
+  if (fetching) return <Spinning />;
 
   const needsLoginService = auth.findMissingAuthServices(error)[0];
 

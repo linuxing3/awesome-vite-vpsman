@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Spinning from '../../components/Spinning';
 import {
   queryMemberList,
-  updateMember,
   removeMember
 } from '../../service/member/member';
 
@@ -11,7 +11,7 @@ import {
  */
 const handleAdd = async () => {
   console.log("Redirecting ...")
-  window.location.href = '/member/add'
+  window.location.href = '/member/form'
 };
 
 /**
@@ -71,25 +71,25 @@ const MemberTable = () => {
         <tr>
           <th
             scope='col'
-            className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+            className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
           >
             Name
           </th>
           <th
             scope='col'
-            className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+            className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
           >
             Job
           </th>
           <th
             scope='col'
-            className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+            className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
           >
             Phone
           </th>
           <th
             scope='col'
-            className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+            className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
           >
             City
           </th>
@@ -114,11 +114,11 @@ const MemberTable = () => {
               </div>
             </td>
             <td className='px-6 py-4 whitespace-nowrap'>
-              <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
+              <span className='inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full'>
                 {member.phone}
               </span>
             </td>
-            <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
+            <td className='px-6 py-4 text-sm font-medium text-right whitespace-nowrap'>
               <a
                 href={member.city}
                 className='text-indigo-600 hover:text-indigo-900'
@@ -130,16 +130,17 @@ const MemberTable = () => {
         ))}
       </tbody>
     </table>
-  ) : null;
+  ) : <Spinning />;
 
+  
   return (
     <div className='flex flex-col'>
       <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
-        <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
-          <div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
+        <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
+          <div className='overflow-hidden border-b border-gray-200 shadow sm:rounded-lg'>
           <button
               type="button"
-              className="-mr-1 flex p-2 rounded-md bg-indigo-500 text-white sm:-mr-2"
+              className="flex p-2 -mr-1 text-white bg-indigo-500 rounded-md sm:-mr-2"
               onClick={() => handleAdd()}
             >
               Add New

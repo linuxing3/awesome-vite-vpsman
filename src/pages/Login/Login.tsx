@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import { LoginParamsType, loginUser, logoutUser } from '../../service/user';
+import { connect } from 'dva';
+import { LoginParamsType } from '../../service/user';
 
-export default function Login() {
+function Login({login, signup}) {
 
   const [register, setRegister] = useState(false);
   
-  const [userLoginState, setUserLoginState] = useState<API.LoginStateType>({
-    status: 'error',
-    type: ''
-  });
-
   const [values, setValues] = useState<LoginParamsType>({
     password: '20090909',
     email: 'linuxing3@qq.com',
@@ -38,12 +34,9 @@ export default function Login() {
     e.preventDefault();
     console.log(values);
     if (register) {
-      logoutUser(values, 'POST');
-      window.location.href = '/'
+      signup(values, 'POST');
     } else {
-      loginUser(values, 'POST');
-      setUserLoginState({ status: 'ok' });
-      window.location.href = '/dashboard'
+      login(values, 'POST');
     }
   };
   
@@ -139,3 +132,20 @@ export default function Login() {
     </div>
   );
 }
+
+function mapStateToProps(state) {
+  return state.user;
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    login(loginInfo) {
+      dispatch({ type: 'user/login', payload: loginInfo });
+    },
+    signup(loginInfo) {
+      dispatch({ type: 'user/signup', payload: loginInfo });
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

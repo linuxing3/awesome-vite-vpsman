@@ -24,15 +24,17 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "chart.js": "^3.2.1",
     "dva": "^2.4.1",
     "electron-is-dev": "^2.0.0",
     "esbuild": "^0.11.17",
-    "urql": "1.10.1",
     "graphql": "15.3.0",
-    "onegraph-subscription-client": "2.2.3",
     "onegraph-auth": "3.0.0",
+    "onegraph-subscription-client": "2.2.3",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-chartjs-2": "^3.0.3",
+    "react-dom": "^17.0.0",
+    "urql": "1.10.1"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",

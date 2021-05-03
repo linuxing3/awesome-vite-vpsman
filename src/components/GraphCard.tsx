@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import AdvertCard from './AdvertCard';
 import { TableCard } from './TableCard';
 
+import { Doughnut, Bar, Line, } from 'react-chartjs-2';
+
 const cards = [
   {
-    id: 'chartjs-7',
+    id: 'bar',
     meta: {
       type: 'bar',
       data: {
@@ -40,7 +42,7 @@ const cards = [
     }
   },
   {
-    id: '',
+    id: 'line',
     meta: {
       type: 'line',
       data: {
@@ -67,7 +69,7 @@ const cards = [
     }
   },
   {
-    id: '',
+    id: 'bar',
     meta: {
       type: 'bar',
       data: {
@@ -121,7 +123,7 @@ const cards = [
     }
   },
   {
-    id: '',
+    id: 'doughnut',
     meta: {
       type: 'doughnut',
       data: {
@@ -145,20 +147,15 @@ const cards = [
 const GraphCard = (props) => {
   return (
     <div className='flex flex-row flex-wrap flex-grow mt-2'>
-      {cards.map((card) => (
-        <div className='w-full p-6 md:w-1/2 xl:w-1/3'>
+      {cards.map((card, index) => (
+        <div key={index} className='w-full p-6 md:w-1/2 xl:w-1/3'>
           {' '}
           <div className='bg-white border-transparent rounded-lg shadow-xl'>
             <div className='p-2 text-gray-800 uppercase border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg bg-gradient-to-b from-gray-300 to-gray-100'>
               <h5 className='font-bold text-gray-600 uppercase'>Graph</h5>
             </div>
             <div className='p-5'>
-              <canvas
-                id={card.id}
-                className='chartjs'
-                width='undefined'
-                height='undefined'
-              ></canvas>
+              <Bar type={card.meta.type} data={card.meta.data}></Bar>
             </div>
           </div>
         </div>

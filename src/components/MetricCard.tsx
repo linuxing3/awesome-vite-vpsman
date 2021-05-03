@@ -14,8 +14,8 @@ const CardMeta = [
   },
   {
     icon: 'fa fa-user-plus',
-    title: 'Total Revenue',
-    description: '$3249',
+    title: 'New Users',
+    description: '49',
   },
   {
     icon: 'fas fa-server ',

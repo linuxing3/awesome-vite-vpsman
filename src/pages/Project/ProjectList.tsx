@@ -21,25 +21,51 @@ const Project = ({ username }) => {
 
   if (fetching) return <pre>Loading...</pre>;
 
+  const needsLoginService = auth.findMissingAuthServices(error)[0];
+
+  const AuthButton = () => (
+    <button
+      className='block w-full px-4 py-2 text-xl text-left text-gray-700'
+      onClick={async () => {
+        if (!needsLoginService) {
+          await auth.login(needsLoginService);
+          reexecuteQuery({ requestPolicy: 'cache-and-network' });
+        } else {
+          const loginSuccess = await auth.isLoggedIn(needsLoginService);
+          if (loginSuccess) {
+            console.log('Successfully logged into ' + needsLoginService);
+            reexecuteQuery({ requestPolicy: 'cache-and-network' });
+          } else {
+            console.log('The user did not grant auth to ' + needsLoginService);
+          }
+        }
+      }}
+    >
+      {needsLoginService
+        ? `Log in to ${needsLoginService}`
+        : 'Query Github Projects'}
+    </button>
+  );
+
   const dataEl = data ? (
     <table className='min-w-full divide-y divide-gray-200'>
       <thead className='bg-gray-50'>
         <tr>
           <th
             scope='col'
-            className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+            className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
           >
             Author
           </th>
           <th
             scope='col'
-            className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+            className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
           >
             Name
           </th>
           <th
             scope='col'
-            className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+            className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
           >
             Status
           </th>
@@ -53,9 +79,9 @@ const Project = ({ username }) => {
           <tr key={project.id}>
             <td className='px-6 py-4 whitespace-nowrap'>
               <div className='flex items-center'>
-                <div className='flex-shrink-0 h-10 w-10'>
+                <div className='flex-shrink-0 w-10 h-10'>
                   <img
-                    className='h-10 w-10 rounded-full'
+                    className='w-10 h-10 rounded-full'
                     src={userInfo ? userInfo.data?.avatarUrl : ''}
                     alt=''
                   />
@@ -78,11 +104,11 @@ const Project = ({ username }) => {
               </div>
             </td>
             <td className='px-6 py-4 whitespace-nowrap'>
-              <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
+              <span className='inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full'>
                 Active
               </span>
             </td>
-            <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
+            <td className='px-6 py-4 text-sm font-medium text-right whitespace-nowrap'>
               <a
                 href={project.url}
                 className='text-indigo-600 hover:text-indigo-900'
@@ -99,6 +125,7 @@ const Project = ({ username }) => {
   const errorEl = error ? (
     <div className='error-box'>
       Error in UnnamedQuery. <br />
+      <AuthButton></AuthButton>
       {error.message && error.message.startsWith('[Network]') ? (
         <span>
           Make sure <strong>{window.location.origin}</strong> is in your CORS
@@ -115,38 +142,11 @@ const Project = ({ username }) => {
     </div>
   ) : null;
 
-  const needsLoginService = auth.findMissingAuthServices(error)[0];
-
-  const AuthButton = () => (
-    <button
-      className='text-gray-700 block w-full text-left px-4 py-2 text-xl'
-      onClick={async () => {
-        if (!needsLoginService) {
-          await auth.login(needsLoginService);
-          reexecuteQuery({ requestPolicy: 'cache-and-network' });
-        } else {
-          const loginSuccess = await auth.isLoggedIn(needsLoginService);
-          if (loginSuccess) {
-            console.log('Successfully logged into ' + needsLoginService);
-            reexecuteQuery({ requestPolicy: 'cache-and-network' });
-          } else {
-            console.log('The user did not grant auth to ' + needsLoginService);
-          }
-        }
-      }}
-    >
-      {needsLoginService
-        ? `Log in to ${needsLoginService}`
-        : 'Query Github Projects'}
-    </button>
-  );
-
   return (
     <div className='flex flex-col'>
       <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
-        <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
-          <div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
-            <AuthButton></AuthButton>
+        <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
+          <div className='overflow-hidden border-b border-gray-200 shadow sm:rounded-lg'>
             <br />
             {dataEl}
             {errorEl}

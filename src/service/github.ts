@@ -51,7 +51,7 @@ export interface GithubRepository {
   };
 }
 
-type GitHubNodes = GithubNode[];
+export type GitHubNodes = GithubNode[];
 
 export interface GithubUser {
   gitHub: {
@@ -59,16 +59,14 @@ export interface GithubUser {
   };
 }
 
-type GithubUserInfo = {
+export type GithubUserInfo = {
   avatarUrl?: string;
   login?: string;
   name?: string;
   email?: string;
   bio?: string;
   websiteUrl?: string;
-  status?: {
-    id?: number;
-  };
+  status?: any;
 };
 
 export const GITHUB_USER_QUERY = `

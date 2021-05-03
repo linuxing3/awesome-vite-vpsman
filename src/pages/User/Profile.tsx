@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Provider } from 'urql';
-import { auth, urqlClient, getUserInfo } from '../service/github';
+import { auth, urqlClient, getUserInfo } from '../../service/github';
 
-function Profile({ username }) {
+const Profile = ({ username }) => {
   const [userInfo, reexecuteQuery] = getUserInfo(username);
 
   const needsLoginService = auth.findMissingAuthServices(userInfo.error)[0];
@@ -53,7 +53,7 @@ function Profile({ username }) {
                   id='company_website'
                   className='focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300'
                   placeholder={
-                    userInfo ? userInfo.data.websiteUrl : 'example.com'
+                    userInfo && userInfo.data ? userInfo.data.websiteUrl : 'example.com'
                   }
                 />
               </div>
@@ -73,7 +73,7 @@ function Profile({ username }) {
                 name='about'
                 rows={3}
                 className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md'
-                placeholder={userInfo ? userInfo.data.bio : ''}
+                placeholder={userInfo && userInfo.data ? userInfo.data.bio : ''}
                 defaultValue={''}
               ></textarea>
             </div>
@@ -91,7 +91,7 @@ function Profile({ username }) {
                 {userInfo ? (
                   <img
                     className='h-10 w-10 rounded-full'
-                    src={userInfo ? userInfo.data.avatarUrl : ''}
+                    src={userInfo && userInfo.data ? userInfo.data.avatarUrl : ''}
                     alt=''
                   />
                 ) : (
@@ -184,7 +184,7 @@ function Profile({ username }) {
                 name='first_name'
                 id='first_name'
                 autoComplete='given-name'
-                placeholder={userInfo ? userInfo.data.name : ''}
+                placeholder={userInfo && userInfo.data ? userInfo.data.name : ''}
                 className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
               />
             </div>
@@ -201,7 +201,7 @@ function Profile({ username }) {
                 name='last_name'
                 id='last_name'
                 autoComplete='family-name'
-                placeholder={userInfo ? userInfo.data.name : ''}
+                placeholder={userInfo && userInfo.data ? userInfo.data.name : ''}
                 className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
               />
             </div>
@@ -218,7 +218,7 @@ function Profile({ username }) {
                 name='email_address'
                 id='email_address'
                 autoComplete='email'
-                placeholder={userInfo ? userInfo.data.email : ''}
+                placeholder={userInfo && userInfo.data ? userInfo.data.email : ''}
                 className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
               />
             </div>
@@ -466,7 +466,7 @@ function Profile({ username }) {
                 Profile
               </h3>
               <p className='mt-1 text-sm text-gray-600'>
-                {userInfo ? userInfo.data.bio : ''}
+                {userInfo && userInfo.data ? userInfo.data.bio : ''}
               </p>
             </div>
           </div>

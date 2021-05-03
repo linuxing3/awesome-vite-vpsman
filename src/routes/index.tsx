@@ -1,13 +1,14 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'dva/router';
 
-import LoginForm from '../pages/LoginForm';
-import Setting from '../pages/Setting';
-import Home from '../pages/Home';
-import Project from '../pages/Project';
-import Profile from '../pages/Profile';
+import Home from '../pages/Landing';
+import Promotion from '../pages/Promotion';
+import Login from '../pages/Login/Login';
+import Setting from '../pages/User/Setting';
+import Profile from '../pages/User/Profile';
 import MemberForm from '../pages/Member/MemberForm';
 import MemberList from '../pages/Member/MemberList';
+import Project from '../pages/Project/ProjectList';
 
 // A wrapper for <Route> that redirects to the login
 // screen if you're not yet authenticated.
@@ -36,9 +37,12 @@ function PrivateRoute({ children, ...rest }) {
 export default () => (
   <Switch>
     <Route path='/login'>
-      <LoginForm />
+      <Login />
     </Route>
-    <PrivateRoute path='/member/add'>
+    <PrivateRoute path='/promotion'>
+      <Promotion />
+    </PrivateRoute>
+    <PrivateRoute path='/member/form'>
       <MemberForm />
     </PrivateRoute>
     <PrivateRoute path='/member/list'>

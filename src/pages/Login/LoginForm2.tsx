@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'dva';
 import { LockClosedIcon } from '@heroicons/react/solid';
-import { LoginParamsType } from '../service/user';
+import { LoginParamsType } from '../../service/user';
 
 const LoginMessage: React.FC<{
   content: string;
@@ -69,7 +69,7 @@ function LoginForm({ login, signup }) {
   };
 
   return (
-    <div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>
+    <div className='min-h-screen flex items-start justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>
       <div className='max-w-md w-full space-y-8'>
         <div>
           <img

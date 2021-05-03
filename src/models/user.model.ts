@@ -66,7 +66,13 @@ const user: Model = {
     }
   },
   subscriptions: {
-    setup({ dispatch, history }) {}
+    setup({ dispatch, history }) {
+      return history.listen(({ pathname }) => {
+        // if (pathname === '/') {
+        //   dispatch({ type: 'logout' });
+        // }
+      });
+    }
   }
 };
 

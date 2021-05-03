@@ -6,7 +6,7 @@ import {
   urqlClient,
   APP_ID,
   GithubNode
-} from '../service/github';
+} from '../../service/github';
 import { Provider, useQuery } from 'urql';
 
 const Project = ({ username }) => {

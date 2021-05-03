@@ -11,8 +11,8 @@ const navigation = [
   },
   {
     key: 2,
-    url: '/team',
-    title: 'Team'
+    url: '/promotion',
+    title: 'Promotion'
   },
   {
     key: 3,
@@ -46,25 +46,25 @@ export default ({ avatarUrl }) => {
       <Disclosure as='nav' className='bg-gray-800'>
         {({ open }) => (
           <>
-            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+            <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
               <div className='flex items-center justify-between h-16'>
                 <div className='flex items-center'>
                   <div className='flex-shrink-0'>
                     <img
-                      className='h-8 w-8'
+                      className='w-8 h-8'
                       src='https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg'
                       alt='Workflow'
                     />
                   </div>
                   <div className='hidden md:block'>
-                    <div className='ml-10 flex items-baseline space-x-4'>
+                    <div className='flex items-baseline ml-10 space-x-4'>
                       {navigation.map((item, itemIdx) =>
                         itemIdx === 0 ? (
                           <Fragment key={itemIdx}>
                             {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                             <a
                               href='/'
-                              className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
+                              className='px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-md'
                             >
                               {item.title}
                             </a>
@@ -73,7 +73,7 @@ export default ({ avatarUrl }) => {
                           <a
                             key={itemIdx}
                             href={item.url}
-                            className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+                            className='px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white'
                           >
                             {item.title}
                           </a>
@@ -83,21 +83,21 @@ export default ({ avatarUrl }) => {
                   </div>
                 </div>
                 <div className='hidden md:block'>
-                  <div className='ml-4 flex items-center md:ml-6'>
-                    <button className='bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
+                  <div className='flex items-center ml-4 md:ml-6'>
+                    <button className='p-1 text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
                       <span className='sr-only'>View notifications</span>
-                      <BellIcon className='h-6 w-6' aria-hidden='true' />
+                      <BellIcon className='w-6 h-6' aria-hidden='true' />
                     </button>
 
                     {/* Profile dropdown */}
-                    <Menu as='div' className='ml-3 relative'>
+                    <Menu as='div' className='relative ml-3'>
                       {({ open }) => (
                         <>
                           <div>
-                            <Menu.Button className='max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
+                            <Menu.Button className='flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
                               <span className='sr-only'>Open user menu</span>
                                 <img
-                                  className='h-10 w-10 rounded-full'
+                                  className='w-10 h-10 rounded-full'
                                   src={avatarUrl}
                                   alt=''
                                 />
@@ -115,7 +115,7 @@ export default ({ avatarUrl }) => {
                           >
                             <Menu.Items
                               static
-                              className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'
+                              className='absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
                             >
                               {profile.map((item, itemIdx) => (
                                 <Menu.Item key={itemIdx}>
@@ -139,14 +139,14 @@ export default ({ avatarUrl }) => {
                     </Menu>
                   </div>
                 </div>
-                <div className='-mr-2 flex md:hidden'>
+                <div className='flex -mr-2 md:hidden'>
                   {/* Mobile menu button */}
-                  <Disclosure.Button className='bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
+                  <Disclosure.Button className='inline-flex items-center justify-center p-2 text-gray-400 bg-gray-800 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
                     <span className='sr-only'>Open main menu</span>
                     {open ? (
-                      <XIcon className='block h-6 w-6' aria-hidden='true' />
+                      <XIcon className='block w-6 h-6' aria-hidden='true' />
                     ) : (
-                      <MenuIcon className='block h-6 w-6' aria-hidden='true' />
+                      <MenuIcon className='block w-6 h-6' aria-hidden='true' />
                     )}
                   </Disclosure.Button>
                 </div>
@@ -161,7 +161,7 @@ export default ({ avatarUrl }) => {
                       {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                       <a
                         href='#'
-                        className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
+                        className='block px-3 py-2 text-base font-medium text-white bg-gray-900 rounded-md'
                       >
                         {item.title}
                       </a>
@@ -170,7 +170,7 @@ export default ({ avatarUrl }) => {
                     <a
                       key={itemIdx}
                       href={item.url}
-                      className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+                      className='block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white'
                     >
                       {item.title}
                     </a>
@@ -181,7 +181,7 @@ export default ({ avatarUrl }) => {
                 <div className='flex items-center px-5'>
                   <div className='flex-shrink-0'>
                     <img
-                      className='h-10 w-10 rounded-full'
+                      className='w-10 h-10 rounded-full'
                       src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
                       alt=''
                     />
@@ -194,17 +194,17 @@ export default ({ avatarUrl }) => {
                       tom@example.com
                     </div>
                   </div>
-                  <button className='ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
+                  <button className='flex-shrink-0 p-1 ml-auto text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
                     <span className='sr-only'>View notifications</span>
-                    <BellIcon className='h-6 w-6' aria-hidden='true' />
+                    <BellIcon className='w-6 h-6' aria-hidden='true' />
                   </button>
                 </div>
-                <div className='mt-3 px-2 space-y-1'>
+                <div className='px-2 mt-3 space-y-1'>
                   {profile.map((item, itemIdx) => (
                     <a
                       key={itemIdx}
                       href={item.url}
-                      className='block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700'
+                      className='block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:text-white hover:bg-gray-700'
                     >
                       {item.title}
                     </a>
@@ -216,7 +216,7 @@ export default ({ avatarUrl }) => {
         )}
       </Disclosure>
       {/* <header className='bg-white shadow'>
-        <div className='max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8'>
+        <div className='px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8'>
           <h1 className='text-3xl font-bold text-gray-900'>Dashboard</h1>
         </div>
       </header> */}

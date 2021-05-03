@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from 'dva/router';
 
 import Home from '../pages/Landing';
 import Promotion from '../pages/Promotion';
+import DashBoard from '../pages/Dashboard/Dashboard';
 import Login from '../pages/Login/Login';
 import Setting from '../pages/User/Setting';
 import Profile from '../pages/User/Profile';
@@ -39,6 +40,9 @@ export default () => (
     <Route path='/login'>
       <Login />
     </Route>
+    <PrivateRoute path='/dashboard'>
+      <DashBoard />
+    </PrivateRoute>
     <PrivateRoute path='/promotion'>
       <Promotion />
     </PrivateRoute>

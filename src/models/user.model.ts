@@ -40,7 +40,7 @@ const user: Model = {
         yield put(routerRedux.push('/profile'));
       } catch (error) {
         yield call(userService.registerUser, value, 'POST');
-        yield put(routerRedux.push('/login'));
+        yield put(routerRedux.push('/dashboard'));
       }
     },
     *register({ payload: value }, { call, put }) {
@@ -53,7 +53,7 @@ const user: Model = {
       console.log('Redirecting to login...');
       yield put(routerRedux.push('/login'));
     },
-    *logout({ payload: value }, { call, put }) {
+    *logout({ payload: value }, { put }) {
       // 模拟网络请求
       console.log('Logout...' + value.mobile);
       localStorage.setItem('access_token', '');

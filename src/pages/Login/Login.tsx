@@ -43,7 +43,7 @@ export default function Login() {
     } else {
       loginUser(values, 'POST');
       setUserLoginState({ status: 'ok' });
-      window.location.href = '/'
+      window.location.href = '/dashboard'
     }
   };
   

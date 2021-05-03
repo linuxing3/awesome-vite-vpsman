@@ -40,10 +40,17 @@ const profile = [
 ];
 
 export default ({ avatarUrl }) => {
+  const gradientColor =
+    'linear-gradient(90deg, rgb(33 22 206) 0%, rgb(183 168 222) 100%)';
+
   return (
     <div>
-      (
-      <Disclosure as='nav' className='bg-gray-800'>
+      <Disclosure
+        as='nav'
+        style={{
+          background: gradientColor
+        }}
+      >
         {({ open }) => (
           <>
             <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
@@ -96,11 +103,11 @@ export default ({ avatarUrl }) => {
                           <div>
                             <Menu.Button className='flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
                               <span className='sr-only'>Open user menu</span>
-                                <img
-                                  className='w-10 h-10 rounded-full'
-                                  src={avatarUrl}
-                                  alt=''
-                                />
+                              <img
+                                className='w-10 h-10 rounded-full'
+                                src={avatarUrl}
+                                alt=''
+                              />
                             </Menu.Button>
                           </div>
                           <Transition

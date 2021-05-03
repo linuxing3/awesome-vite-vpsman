@@ -1,6 +1,9 @@
 import React from 'react';
 import HeroImage from '../assets/hero.png';
 
+const gradientColor =
+  'linear-gradient(90deg, rgb(33 22 206) 0%, rgb(183 168 222) 100%)';
+
 export default function LandingPage() {
   const ConnectedWorldImage = () => {
     return (
@@ -691,7 +694,7 @@ export default function LandingPage() {
       className='leading-normal tracking-normal text-white gradient'
       style={{
         fontFamily: 'Source Sans Pro',
-        background: 'linear-gradient(90deg, rgb(33 22 206) 0%, rgb(183 168 222) 100%)'
+        background: gradientColor
       }}
     >
       {/* nav */}
@@ -699,7 +702,7 @@ export default function LandingPage() {
         <div
           className='container flex flex-col flex-wrap items-center px-16 mx-auto md:flex-row'
           style={{
-            background: 'linear-gradient(90deg, rgb(33 22 206) 0%, rgb(183 168 222) 100%)'
+            background: gradientColor
           }}
         >
           <div className='flex flex-col items-start justify-center w-full text-center md:w-2/5 md:text-left'>
@@ -713,9 +716,10 @@ export default function LandingPage() {
               Sub-hero message, not too long and not too short. Make it just
               right!
             </p>
-            <button 
-            onClick={() => window.location.href="/login"}
-            className='px-8 py-4 mx-auto my-6 font-bold text-gray-600 transition duration-300 ease-in-out transform bg-white rounded-full shadow-lg lg:mx-0 hover:underline focus:outline-none focus:shadow-outline hover:scale-105'>
+            <button
+              onClick={() => (window.location.href = '/login')}
+              className='px-8 py-4 mx-auto my-6 font-bold text-gray-600 transition duration-300 ease-in-out transform bg-white rounded-full shadow-lg lg:mx-0 hover:underline focus:outline-none focus:shadow-outline hover:scale-105'
+            >
               Subscribe
             </button>
           </div>
@@ -848,11 +852,10 @@ export default function LandingPage() {
             <div className='flex-none p-6 mt-auto overflow-hidden bg-white rounded-t-none rounded-b shadow'>
               <div className='flex items-center justify-start'>
                 <button
-                  onClick={()=> window.location.href='/projects'}
+                  onClick={() => (window.location.href = '/projects')}
                   className='px-8 py-4 mx-auto my-6 font-bold text-white transition duration-300 ease-in-out transform rounded-full shadow-lg lg:mx-0 hover:underline gradient focus:outline-none focus:shadow-outline hover:scale-105'
                   style={{
-                    background:
-                      'linear-gradient(90deg, rgb(33 22 206) 0%, rgb(183 168 222) 100%)'
+                    background: gradientColor
                   }}
                 >
                   Projects
@@ -881,11 +884,10 @@ export default function LandingPage() {
             <div className='flex-none p-6 mt-auto overflow-hidden bg-white rounded-t-none rounded-b shadow'>
               <div className='flex items-center justify-center'>
                 <button
-                  onClick={()=> window.location.href='/member/list'}
+                  onClick={() => (window.location.href = '/member/list')}
                   className='px-8 py-4 mx-auto my-6 font-bold text-white transition duration-300 ease-in-out transform rounded-full shadow-lg lg:mx-0 hover:underline gradient focus:outline-none focus:shadow-outline hover:scale-105'
                   style={{
-                    background:
-                      'linear-gradient(90deg, rgb(33 22 206) 0%, rgb(183 168 222) 100%)'
+                    background: gradientColor
                   }}
                 >
                   Member List
@@ -914,11 +916,10 @@ export default function LandingPage() {
             <div className='flex-none p-6 mt-auto overflow-hidden bg-white rounded-t-none rounded-b shadow'>
               <div className='flex items-center justify-end'>
                 <button
-                  onClick={()=> window.location.href='/promotion'}
+                  onClick={() => (window.location.href = '/promotion')}
                   className='px-8 py-4 mx-auto my-6 font-bold text-white transition duration-300 ease-in-out transform rounded-full shadow-lg lg:mx-0 hover:underline gradient focus:outline-none focus:shadow-outline hover:scale-105'
                   style={{
-                    background:
-                      'linear-gradient(90deg, rgb(33 22 206) 0%, rgb(183 168 222) 100%)'
+                    background: gradientColor
                   }}
                 >
                   Promotion
@@ -955,11 +956,10 @@ export default function LandingPage() {
                 </div>
                 <div className='flex items-center justify-center'>
                   <button
-                    onClick={()=>window.location.href='/promotion'}
+                    onClick={() => (window.location.href = '/promotion')}
                     className='px-8 py-4 mx-auto my-6 font-bold text-white transition duration-300 ease-in-out transform rounded-full shadow-lg lg:mx-0 hover:underline gradient focus:outline-none focus:shadow-outline hover:scale-105'
                     style={{
-                      background:
-                        'linear-gradient(90deg, rgb(33 22 206) 0%, rgb(183 168 222) 100%)'
+                      background: gradientColor
                     }}
                   >
                     Sign Up
@@ -987,11 +987,10 @@ export default function LandingPage() {
                 </div>
                 <div className='flex items-center justify-center'>
                   <button
-                    onClick={()=>window.location.href='/promotion'}
+                    onClick={() => (window.location.href = '/promotion')}
                     className='px-8 py-4 mx-auto my-6 font-bold text-white transition duration-300 ease-in-out transform rounded-full shadow-lg lg:mx-0 hover:underline gradient focus:outline-none focus:shadow-outline hover:scale-105'
                     style={{
-                      background:
-                        'linear-gradient(90deg, rgb(33 22 206) 0%, rgb(183 168 222) 100%)'
+                      background: gradientColor
                     }}
                   >
                     Sign Up
@@ -1017,11 +1016,10 @@ export default function LandingPage() {
                 </div>
                 <div className='flex items-center justify-center'>
                   <button
-                    onClick={()=>window.location.href='/promotion'}
+                    onClick={() => (window.location.href = '/promotion')}
                     className='px-8 py-4 mx-auto my-6 font-bold text-white transition duration-300 ease-in-out transform rounded-full shadow-lg lg:mx-0 hover:underline gradient focus:outline-none focus:shadow-outline hover:scale-105'
                     style={{
-                      background:
-                        'linear-gradient(90deg, rgb(33 22 206) 0%, rgb(183 168 222) 100%)'
+                      background: gradientColor
                     }}
                   >
                     Sign Up

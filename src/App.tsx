@@ -17,10 +17,10 @@ export default function App(props: Props & SubscriptionAPI) {
       <div>
         <NavBar avatarUrl={avatarUrl} />
         <main>
-          <div className='max-w-7xl mx-auto py-6 sm:px-6 lg:px-8'>
+          <div className='py-6 mx-auto max-w-7xl sm:px-6 lg:px-8'>
             {/* Replace with your content */}
             <div className='px-4 py-6 sm:px-0'>
-              <div className='border-0 border-dashed border-white-200 rounded-lg h-96'>
+              <div className='border-0 border-dashed rounded-lg border-white-200 h-96'>
                 <Switch></Switch>
               </div>
             </div>

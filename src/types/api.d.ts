@@ -1,7 +1,7 @@
 declare namespace API {
-  export interface CurrentUser {
-    avatar?: string;
-    name?: string;
+  export interface CurrentUserType {
+    avatarUrl: string;
+    name: string;
     title?: string;
     group?: string;
     signature?: string;
@@ -12,15 +12,48 @@ declare namespace API {
     userid?: string;
     access?: 'user' | 'guest' | 'admin';
     unreadCount?: number;
-    menuTree?:[];
+    menuTree?: [];
   }
 
+  export interface UserStateType {
+    mobile: string;
+    access_token: string;
+    access_expire?: number;
+    refresh_after?: number;
+    auid?: number;
+    uid?: number;
+    beid?: number;
+    ptyid?: number;
+    username?: string;
+    nickname?: string;
+    openid?: string;
+    avator?: string;
+  }
+
+  export interface AppPropsType {
+    color: string;
+    gradientColor: string;
+    theme: string;
+    currentUser: API.CurrentUserType;
+    navigation: API.MenuItemPropsType[];
+    profile: API.MenuItemPropsType[];
+    setColor: (color: string) => void;
+    setTheme: (theme: string) => void;
+    setGradientColor: (color: string) => void;
+  }
+
+  export interface MenuItemPropsType {
+    key: number;
+    url: string;
+    title: string;
+    control?: object;
+  }
   export interface LoginStateType {
     status?: 'ok' | 'error';
     type?: string;
   }
 
-  export interface NoticeIconData {
+  export interface NoticeIconDataType {
     id: string;
     key: string;
     avatar: string;

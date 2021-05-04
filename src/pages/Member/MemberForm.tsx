@@ -26,7 +26,7 @@ const sampleMember = {
 };
 
 function MemberForm() {
-  const [values, setValues] = useState<Member.MemberItem>(sampleMember);
+  const [values, setValues] = useState<Member.MemberItemType>(sampleMember);
 
   const [isUpdate, setIsUpdate] = useState(false);
 
@@ -68,7 +68,7 @@ function MemberForm() {
    * 更新节点
    * @param fields
    */
-  const handleUpdate = async (values: Member.MemberItem) => {
+  const handleUpdate = async (values: Member.MemberItemType) => {
     try {
       await updateMember(values);
       return true;

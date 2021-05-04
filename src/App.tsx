@@ -3,14 +3,13 @@ import Switch from './routes';
 import { RouteComponentProps, routerRedux } from 'dva/router';
 import { connect, SubscriptionAPI } from 'dva';
 import NavBar from './components/Navbar';
-import { AppModel } from './models/app.model';
 
-type AppProps = RouteComponentProps & SubscriptionAPI & AppModel;
+type RouterProps = RouteComponentProps & SubscriptionAPI & API.AppPropsType;
 
 const { ConnectedRouter } = routerRedux;
 
-function App({ author, history, gradientColor, setTheme }: AppProps) {
-  let avatarUrl = author.avatarUrl;
+function App({ currentUser, navigation, profile, history, gradientColor, setTheme }: RouterProps) {
+  let avatarUrl = currentUser.avatarUrl;
 
   const handleChangeTheme = (theme: string) => {
     setTheme(theme);
@@ -19,7 +18,7 @@ function App({ author, history, gradientColor, setTheme }: AppProps) {
   return (
     <ConnectedRouter history={history}>
       <div>
-        <NavBar avatarUrl={avatarUrl} gradientColor={gradientColor} />
+        <NavBar currentUser={currentUser} profile={profile} navigation={navigation} gradientColor={gradientColor} />
         <main>
           <div className='py-6 mx-auto max-w-7xl sm:px-6 lg:px-8'>
             <div className='px-4 py-6 sm:px-0'>

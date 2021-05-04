@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { connect } from 'dva';
 import { LockClosedIcon } from '@heroicons/react/solid';
-import { LoginParamsType } from '../../service/user';
+import { LoginParams } from '../../service/user';
 
 const LoginMessage: React.FC<{
   content: string;
@@ -31,7 +31,7 @@ function LoginForm({ login, signup }) {
     type: ''
   });
 
-  const [values, setValues] = useState<LoginParamsType>({
+  const [values, setValues] = useState<LoginParams>({
     email: 'linuxing3@qq.com',
     remember: 0,
     ...defaultValues,

@@ -5,7 +5,7 @@ const service = axios.create({
 })
 
 // data传入必须是对象
-export default function request(url: string, data: object, method = "GET") {
+export default function ajax(url: string, data: object, method = "GET") {
   let promise: Promise<any>;
 
   let headers: AxiosRequestConfig["headers"] = {} 
@@ -13,7 +13,36 @@ export default function request(url: string, data: object, method = "GET") {
 
   if (access_token !== "") {
     headers = {
-      Authorization: "bearer " + access_token
+      Authorization: "Bearer " + access_token
+    }
+  }
+
+  if (method === "GET") {
+    promise = service.get(url, { params: data, headers });
+  } else {
+    promise = service.post(url, data, { headers });
+  }
+
+  return promise
+    .then((res: AxiosResponse) => {
+      return res.data;
+    })
+    .catch((err) => {
+      // 这里可以用Antd的message.error(提示下错误)
+      console.log("请求失败了");
+      console.error(err);
+    });
+}
+
+export function request(url: string, {data, method = "GET"}) {
+  let promise: Promise<any>;
+
+  let headers: AxiosRequestConfig["headers"] = {} 
+  let access_token = localStorage.getItem("access_token");
+
+  if (access_token !== "") {
+    headers = {
+      Authorization: "Bearer " + access_token
     }
   }
 

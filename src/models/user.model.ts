@@ -3,7 +3,7 @@ import * as userService from '../service/user';
 import { routerRedux } from 'dva/router';
 import { Model } from 'dva'
 
-const defaultState = {
+const defaultState: API.UserStateType = {
   auid: 0,
   uid: 0,
   beid: 0,
@@ -68,9 +68,9 @@ const user: Model = {
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname }) => {
-        // if (pathname === '/') {
-        //   dispatch({ type: 'logout' });
-        // }
+        if (pathname === '/') {
+          dispatch({ type: 'app/bingo' });
+        }
       });
     }
   }

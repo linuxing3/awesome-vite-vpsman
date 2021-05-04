@@ -1,21 +1,19 @@
 import ajax from '../utils/request';
-const prev = '';
-export interface LoginParamsType {
-  type: number;
-  mobile: string;
-  password: string;
-  username?: string;
+export interface LoginParams extends API.UserStateType{
+  type?: number;
   email?: string;
   captcha?: string;
+  smscode?: string;
   remember?: number;
 }
 
+const prev = '';
 // 测试
-export const loginUser = async (data: {}, method: string) =>
+export const loginUser = async (data: LoginParams, method: string) =>
   ajax(`${prev}/user/login`, data, method);
 
-export const logoutUser = async (data: {}, method: string) =>
+export const logoutUser = async (data: LoginParams, method: string) =>
   ajax(`${prev}/user/logout`, data, method);
   
-export const registerUser = async (data: {}, method: string) =>
+export const registerUser = async (data: LoginParams, method: string) =>
   ajax(`${prev}/user/register`, { smscode: '20090909', ...data }, method);

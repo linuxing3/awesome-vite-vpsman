@@ -3,46 +3,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 import { classNames } from '../utils';
 
-const navigation = [
-  {
-    key: 1,
-    url: '/',
-    title: 'Dashboard'
-  },
-  {
-    key: 2,
-    url: '/promotion',
-    title: 'Promotion'
-  },
-  {
-    key: 3,
-    url: '/projects',
-    title: 'Projects'
-  }
-];
-
-const profile = [
-  {
-    key: 1,
-    url: '/profile',
-    title: 'Your Profile'
-  },
-  {
-    key: 2,
-    url: '/settings',
-    title: 'settings'
-  },
-  {
-    key: 3,
-    url: '/login',
-    title: 'Sign Out'
-  }
-];
-
-export default ({ avatarUrl, gradientColor }) => {
-  // const gradientColor =
-  // 'linear-gradient(90deg, rgb(33 22 206) 0%, rgb(183 168 222) 100%)';
-
+export default ({ navigation, profile, currentUser, gradientColor }: Partial<API.AppPropsType>) => {
   return (
     <div>
       <Disclosure
@@ -68,7 +29,7 @@ export default ({ avatarUrl, gradientColor }) => {
                   </div>
                   <div className='hidden md:block'>
                     <div className='flex items-baseline ml-10 space-x-4'>
-                      {navigation.map((item, itemIdx) =>
+                      {Array.isArray(navigation) ? navigation.map((item, itemIdx) =>
                         itemIdx === 0 ? (
                           <Fragment key={itemIdx}>
                             {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
@@ -88,7 +49,7 @@ export default ({ avatarUrl, gradientColor }) => {
                             {item.title}
                           </a>
                         )
-                      )}
+                      ): null}
                     </div>
                   </div>
                 </div>
@@ -108,7 +69,7 @@ export default ({ avatarUrl, gradientColor }) => {
                               <span className='sr-only'>Open user menu</span>
                               <img
                                 className='w-10 h-10 rounded-full'
-                                src={avatarUrl}
+                                src={currentUser && currentUser.avatarUrl}
                                 alt=''
                               />
                             </Menu.Button>
@@ -127,7 +88,7 @@ export default ({ avatarUrl, gradientColor }) => {
                               static
                               className='absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
                             >
-                              {profile.map((item, itemIdx) => (
+                              {Array.isArray(profile) ? profile.map((item, itemIdx) => (
                                 <Menu.Item key={itemIdx}>
                                   {({ active }) => (
                                     <a
@@ -141,7 +102,7 @@ export default ({ avatarUrl, gradientColor }) => {
                                     </a>
                                   )}
                                 </Menu.Item>
-                              ))}
+                              )): null}
                             </Menu.Items>
                           </Transition>
                         </>
@@ -165,7 +126,7 @@ export default ({ avatarUrl, gradientColor }) => {
 
             <Disclosure.Panel className='md:hidden'>
               <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
-                {navigation.map((item, itemIdx) =>
+                {Array.isArray(navigation) ? navigation.map((item, itemIdx) =>
                   itemIdx === 0 ? (
                     <Fragment key={itemIdx}>
                       {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
@@ -185,14 +146,14 @@ export default ({ avatarUrl, gradientColor }) => {
                       {item.title}
                     </a>
                   )
-                )}
+                ): null}
               </div>
               <div className='pt-4 pb-3 border-t border-gray-700'>
                 <div className='flex items-center px-5'>
                   <div className='flex-shrink-0'>
                     <img
                       className='w-10 h-10 rounded-full'
-                      src={avatarUrl}
+                      src={currentUser && currentUser.avatarUrl}
                       alt=''
                     />
                   </div>
@@ -210,7 +171,7 @@ export default ({ avatarUrl, gradientColor }) => {
                   </button>
                 </div>
                 <div className='px-2 mt-3 space-y-1'>
-                  {profile.map((item, itemIdx) => (
+                  {Array.isArray(profile) ? profile.map((item, itemIdx) => (
                     <a
                       key={itemIdx}
                       href={item.url}
@@ -218,7 +179,7 @@ export default ({ avatarUrl, gradientColor }) => {
                     >
                       {item.title}
                     </a>
-                  ))}
+                  )): null}
                 </div>
               </div>
             </Disclosure.Panel>

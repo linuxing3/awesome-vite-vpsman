@@ -41,7 +41,7 @@ const profile = [
 
 export default ({ avatarUrl, gradientColor }) => {
   // const gradientColor =
-    // 'linear-gradient(90deg, rgb(33 22 206) 0%, rgb(183 168 222) 100%)';
+  // 'linear-gradient(90deg, rgb(33 22 206) 0%, rgb(183 168 222) 100%)';
 
   return (
     <div>
@@ -56,7 +56,10 @@ export default ({ avatarUrl, gradientColor }) => {
             <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
               <div className='flex items-center justify-between h-16'>
                 <div className='flex items-center'>
-                  <div className='flex-shrink-0'>
+                  <div
+                    onClick={() => (window.location.href = '/')}
+                    className='flex-shrink-0 hover:bg-gray-700 hover:text-white'
+                  >
                     <img
                       className='w-8 h-8'
                       src='https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg'
@@ -71,7 +74,7 @@ export default ({ avatarUrl, gradientColor }) => {
                             {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                             <a
                               href='/'
-                              className='px-3 py-2 text-sm font-medium text-white rounded-md'
+                              className='px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-gray-700 hover:text-white'
                             >
                               {item.title}
                             </a>

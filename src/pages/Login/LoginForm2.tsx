@@ -1,3 +1,6 @@
+/**
+ * Form without hook
+ */
 import React, { useState } from 'react';
 import { connect } from 'dva';
 import { LockClosedIcon } from '@heroicons/react/solid';
@@ -6,6 +9,19 @@ import { LoginParamsType } from '../../service/user';
 const LoginMessage: React.FC<{
   content: string;
 }> = ({ content }) => <div>{content}</div>;
+
+type FormValues = {
+  mobile: string;
+  password: string;
+  username?: string;
+  type?: number;
+};
+
+const defaultValues = {
+  mobile: '13901229638',
+  password: '20090909',
+  type: 1
+};
 
 function LoginForm({ login, signup }) {
   const [register, setRegister] = useState(false);
@@ -16,11 +32,9 @@ function LoginForm({ login, signup }) {
   });
 
   const [values, setValues] = useState<LoginParamsType>({
-    password: '20090909',
     email: 'linuxing3@qq.com',
-    mobile: '13901229638',
     remember: 0,
-    type: 1
+    ...defaultValues,
   });
 
   const { status, type: loginType } = userLoginState;
@@ -94,6 +108,7 @@ function LoginForm({ login, signup }) {
           <input type='hidden' name='remember' defaultValue='true' />
           <div className='-space-y-px rounded-md shadow-sm'>
             <div>
+              {/* Text Fields */}
               <label htmlFor='mobile' className='sr-only'>
                 Mobile
               </label>
@@ -124,6 +139,7 @@ function LoginForm({ login, signup }) {
                 onChange={handleEmailChange}
               />
             </div>
+            {/* Text Fields */}
             <div>
               <label htmlFor='password' className='sr-only'>
                 Password

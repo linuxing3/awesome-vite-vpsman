@@ -165,8 +165,8 @@ const Profile = ({ username }) => {
 
   return (
     <div>
-      {dataEl}
       {errorEl}
+      {dataEl}
     </div>
   )
 };

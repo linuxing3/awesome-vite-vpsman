@@ -1,45 +1,37 @@
-import React, { useState } from 'react';
+/**
+ * Form tweaked with hook
+ */
 import { connect } from 'dva';
-import { LoginParamsType } from '../../service/user';
+import React from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { TWInput } from '../../components/TWControl';
 
-function Login({login, signup}) {
+type FormValues = {
+  mobile: string;
+  password: string;
+  username?: string;
+  type?: number;
+};
 
-  const [register, setRegister] = useState(false);
-  
-  const [values, setValues] = useState<LoginParamsType>({
-    password: '20090909',
-    email: 'linuxing3@qq.com',
-    mobile: '13901229638',
-    remember: 0,
-    type: 1
+const defaultValues = {
+  mobile: '13901229638',
+  password: '20090909',
+  type: 1
+};
+
+function Login({ login }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormValues>({
+    defaultValues
   });
-
-  const handleMobileChange = (e) => {
-    e.persist();
-    setValues((values) => ({
-      ...values,
-      mobile: e.target.value
-    }));
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    console.log(data);
+    login({ ...data });
   };
 
-  const handlePasswordChange = (e) => {
-    e.persist();
-    setValues((values) => ({
-      ...values,
-      password: e.target.value
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(values);
-    if (register) {
-      signup(values, 'POST');
-    } else {
-      login(values, 'POST');
-    }
-  };
-  
   return (
     <div
       className='min-h-screen px-2 pt-12 pb-6 body-bg md:pt-20 md:px-0'
@@ -50,48 +42,36 @@ function Login({login, signup}) {
     >
       <header className='max-w-lg mx-auto'>
         <a href='#'>
-          <h1 className='text-4xl font-bold text-center text-white'>Startup</h1>
+          <h1 className='text-4xl font-bold text-center text-white uppercase'>
+            Vpsman
+          </h1>
         </a>
       </header>
 
       <main className='max-w-lg p-8 mx-auto my-10 bg-white rounded-lg shadow-2xl md:p-12'>
         <section>
-          <h3 className='text-2xl font-bold'>Welcome to Startup</h3>
+          <h3 className='text-2xl font-bold'>
+            Welcome to <span className='text-indigo-600'>VPSMAN</span>
+          </h3>
           <p className='pt-2 text-gray-600'>Sign in to your account.</p>
         </section>
 
         <section className='mt-10'>
-          <form className='flex flex-col' method='POST' onSubmit={handleSubmit}>
-            <div className='pt-3 mb-6 bg-gray-200 rounded'>
-              <label
-                className='block mb-2 ml-3 text-sm font-bold text-gray-700'
-                htmlFor='mobile'
-              >
-                Mobile
-              </label>
-              <input
-                type='text'
-                id='mobile'
-                className='w-full px-3 pb-3 text-gray-700 transition duration-500 bg-gray-200 border-b-4 border-gray-300 rounded focus:outline-none focus:border-purple-600'
-                value={values.mobile}
-                onChange={handleMobileChange}
-              />
-            </div>
-            <div className='pt-3 mb-6 bg-gray-200 rounded'>
-              <label
-                className='block mb-2 ml-3 text-sm font-bold text-gray-700'
-                htmlFor='password'
-              >
-                Password
-              </label>
-              <input
-                type='password'
-                id='password'
-                className='w-full px-3 pb-3 text-gray-700 transition duration-500 bg-gray-200 border-b-4 border-gray-300 rounded focus:outline-none focus:border-purple-600'
-                value={values.password}
-                onChange={handlePasswordChange}
-              />
-            </div>
+          <form className='flex flex-col' onSubmit={handleSubmit(onSubmit)}>
+            {/* Text Fields */}
+            <TWInput
+              type='text'
+              label='mobile'
+              register={register}
+              style='text-indigo-600'
+            ></TWInput>
+            <TWInput
+              type='password'
+              label='password'
+              register={register}
+              style='text-indigo-600'
+            ></TWInput>
+            {/* Text Fields */}
             <div className='flex justify-end'>
               <a
                 href='#'
@@ -133,11 +113,11 @@ function Login({login, signup}) {
   );
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return state.user;
-}
+};
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
     login(loginInfo) {
       dispatch({ type: 'user/login', payload: loginInfo });
@@ -146,6 +126,6 @@ function mapDispatchToProps(dispatch) {
       dispatch({ type: 'user/signup', payload: loginInfo });
     }
   };
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

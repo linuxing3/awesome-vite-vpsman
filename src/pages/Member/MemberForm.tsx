@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import { LockClosedIcon } from '@heroicons/react/solid';
 
 import { addMember, updateMember } from '../../service/member/member';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { TWInput } from '../../components/TWControl';
 
-const sampleMember = {
-  id: 14,
+type FormValues = Member.MemberItem;
+
+const defaultValues: FormValues = {
   member_level_id: 4,
   username: 'xingwenju',
   password: '123456',
-  nickname: 'zhangsan',
-  phone: '18613030352',
+  nickname: 'linuxing3',
+  phone: '18813330352',
   status: 1,
   create_time: '2021-03-16 20:40:55',
   icon: '',
@@ -26,49 +29,27 @@ const sampleMember = {
 };
 
 function MemberForm() {
-  const [values, setValues] = useState<Member.MemberItemType>(sampleMember);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormValues>({
+    defaultValues
+  });
 
-  const [isUpdate, setIsUpdate] = useState(false);
-
-  const handleUsernameChange = (e) => {
-    e.persist();
-    setValues((values) => ({
-      ...values,
-      mobile: e.target.value
-    }));
-  };
-
-  const handlePasswordChange = (e) => {
-    e.persist();
-    setValues((values) => ({
-      ...values,
-      password: e.target.value
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(values);
-    if (isUpdate) {
-      handleUpdate(values);
-    } else {
-      try {
-        addMember(values);
-        window.location.href = '/member/list'
-        return true;
-      } catch (error) {
-        console.error('添加会员失败，请重试');
-        window.location.href = '/member/list'
-        return false;
-      }
-    }
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    console.log(data);
+    await addMember(data);
+    setTimeout(() => {
+      window.location.href = '/member/list';
+    }, 500);
   };
 
   /**
    * 更新节点
    * @param fields
    */
-  const handleUpdate = async (values: Member.MemberItemType) => {
+  const handleUpdate = async (values: Member.MemberItem) => {
     try {
       await updateMember(values);
       return true;
@@ -90,41 +71,33 @@ function MemberForm() {
             Add new member
           </h2>
         </div>
-        <form className='mt-8 space-y-6' onSubmit={handleSubmit} method='POST'>
+        <form className='mt-8 space-y-6' onSubmit={handleSubmit(onSubmit)}>
           <div className='rounded-md shadow-sm '>
-            <div className='mb-4'>
-              <label htmlFor='username' className=''>
-                UserName
-              </label>
-              <input
-                id='username'
-                name='username'
-                autoComplete='username'
-                required
-                className='relative block w-full px-3 py-2 my-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                placeholder='Username'
-                value={values.username}
-                onChange={handleUsernameChange}
-              />
-            </div>
-            <div>
-              <label htmlFor='password' className=''>
-                Password
-              </label>
-              <input
-                id='password'
-                name='password'
-                type='password'
-                autoComplete='current-password'
-                required
-                className='relative block w-full px-3 py-2 my-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                placeholder='Password'
-                value={values.password}
-                onChange={handlePasswordChange}
-              />
-            </div>
+            <TWInput
+              type='text'
+              label='username'
+              register={register}
+              style=''
+            ></TWInput>
+            <TWInput
+              type='text'
+              label='phone'
+              register={register}
+              style=''
+            ></TWInput>
+            <TWInput
+              type='password'
+              label='password'
+              register={register}
+              style=''
+            ></TWInput>
+            <TWInput
+              type='text'
+              label='nickname'
+              register={register}
+              style=''
+            ></TWInput>
           </div>
-
           <div>
             <button
               type='submit'
@@ -136,7 +109,7 @@ function MemberForm() {
                   aria-hidden='true'
                 />
               </span>
-              {isUpdate ? 'Edit' : 'Add'}
+              {'Edit'}
             </button>
           </div>
         </form>

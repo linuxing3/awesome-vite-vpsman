@@ -1,11 +1,11 @@
 declare namespace Member {
   export interface MemberItem {
-    id:                     number;
+    id?:                     number;
     username:               string;
+    phone:                  string;
     password:               string;
     member_level_id?:        number;
     nickname?:               string;
-    phone?:                  string;
     status?:                 number;
     create_time?:            string;
     icon?:                   string;

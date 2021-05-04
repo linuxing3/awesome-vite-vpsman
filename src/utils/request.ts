@@ -13,7 +13,7 @@ export default function ajax(url: string, data: object, method = "GET") {
 
   if (access_token !== "") {
     headers = {
-      Authorization: "Bearer " + access_token
+      Authorization: "bearer " + access_token
     }
   }
 
@@ -42,7 +42,7 @@ export function request(url: string, {data, method = "GET"}) {
 
   if (access_token !== "") {
     headers = {
-      Authorization: "Bearer " + access_token
+      Authorization: "bearer " + access_token
     }
   }
 

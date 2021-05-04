@@ -5,11 +5,16 @@ import Home from '../pages/Landing';
 import Promotion from '../pages/Promotion';
 import DashBoard from '../pages/Dashboard/Dashboard';
 import Login from '../pages/Login/Login';
+
 import Setting from '../pages/User/Setting';
 import Profile from '../pages/User/Profile';
+
 import MemberForm from '../pages/Member/MemberForm';
 import MemberList from '../pages/Member/MemberList';
+
 import Project from '../pages/Project/ProjectList';
+
+import OrderList from '../pages/oms/order';
 
 // A wrapper for <Route> that redirects to the login
 // screen if you're not yet authenticated.
@@ -51,6 +56,9 @@ export default () => (
     </PrivateRoute>
     <PrivateRoute path='/member/list'>
       <MemberList />
+    </PrivateRoute>
+    <PrivateRoute path='/order/list'>
+      <OrderList />
     </PrivateRoute>
     <PrivateRoute path='/settings'>
       <Setting />

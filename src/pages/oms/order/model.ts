@@ -1,22 +1,22 @@
 /** Created by guangqiang on 2017/12/17. */
 import { Model } from 'dva'
-import * as orderService from '../service/order';
+import { OrderItem } from './data';
+import * as orderService from './service';
 
-const order: Model = {
+const order: Model & { state: { list: OrderItem[]}} = {
   namespace: 'order',
   state: {
     list: []
   },
   reducers: {
-    save(state, { payload: { data } }) {
+    save(state, { payload: { data } }): {list: OrderItem[]} {
       return { list: [...data] };
     }
   },
   effects: {
-    *fetch({ payload: value }, { call, put }) {
-      // 模拟网络请求
+    *queryOrderList({ payload: value }, { call, put }) {
       console.log('Getting orders...');
-      const orderResp = yield call(orderService.getOrderList, value, 'POST');
+      const orderResp = yield call(orderService.queryOrderList, value, 'POST');
       console.log(orderResp);
       yield put({ type: 'save', payload: { data: orderResp.data } });
     }

@@ -1,23 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Spinning from '../../components/Spinning';
-import {
-  queryMemberList,
-  removeMember
-} from '../../service/member/member';
+import { queryMemberList, removeMember } from '../../service/member/member';
 
-/**
- * 添加节点
- * @param fields
- */
 const handleAdd = async () => {
-  console.log("Redirecting ...")
-  window.location.href = '/member/form'
+  console.log('Redirecting ...');
+  window.location.href = '/member/form';
 };
 
-/**
- *  删除节点(单个)
- * @param id
- */
 const handleRemoveOne = async (id: number) => {
   try {
     await removeMember({
@@ -29,10 +18,6 @@ const handleRemoveOne = async (id: number) => {
   }
 };
 
-/**
- *  删除节点
- * @param selectedRows
- */
 const handleRemove = async (selectedRows: Member.MemberTableListItem[]) => {
   if (!selectedRows) return true;
   try {
@@ -54,7 +39,7 @@ const MemberTable = () => {
   };
 
   useEffect(() => {
-    queryMemberList(queryParams).then(result => {
+    queryMemberList(queryParams).then((result) => {
       console.log(result);
       if (result.data) {
         setMembers(result.data);
@@ -104,14 +89,14 @@ const MemberTable = () => {
             <td className='px-6 py-4 whitespace-nowrap'>
               <div className='flex items-center'>
                 <div className='ml-4'>
-                  <div className='text-sm font-medium text-gray-900'>{member.username}</div>
+                  <div className='text-sm font-medium text-gray-900'>
+                    {member.username}
+                  </div>
                 </div>
               </div>
             </td>
             <td className='px-6 py-4 whitespace-nowrap'>
-              <div className='text-sm text-gray-900'>
-                {member.job}
-              </div>
+              <div className='text-sm text-gray-900'>{member.job}</div>
             </td>
             <td className='px-6 py-4 whitespace-nowrap'>
               <span className='inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full'>
@@ -130,17 +115,18 @@ const MemberTable = () => {
         ))}
       </tbody>
     </table>
-  ) : <Spinning />;
+  ) : (
+    <Spinning />
+  );
 
-  
   return (
     <div className='flex flex-col'>
       <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
         <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
           <div className='overflow-hidden border-b border-gray-200 shadow sm:rounded-lg'>
-          <button
-              type="button"
-              className="flex p-2 -mr-1 text-white bg-indigo-500 rounded-md sm:-mr-2"
+            <button
+              type='button'
+              className='flex p-2 -mr-1 text-white bg-indigo-500 rounded-md sm:-mr-2'
               onClick={() => handleAdd()}
             >
               Add New

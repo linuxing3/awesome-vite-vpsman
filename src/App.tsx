@@ -10,7 +10,7 @@ type AppProps = RouteComponentProps & SubscriptionAPI & AppModel;
 const { ConnectedRouter } = routerRedux;
 
 function App({ author, history, gradientColor, setTheme }: AppProps) {
-  let avatarUrl = localStorage.getItem('avatarUrl') || author.avatarUrl;
+  let avatarUrl = author.avatarUrl;
 
   const handleChangeTheme = (theme: string) => {
     setTheme(theme);

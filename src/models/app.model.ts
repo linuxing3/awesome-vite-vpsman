@@ -23,7 +23,7 @@ const app: Model = {
     author: {
       name: 'linuxing3',
       avatarUrl:
-        'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+        'https://avatars.githubusercontent.com/u/577637?u=89925d8d4e267340a386256d0f788ef39a499734&v=4'
     }
   },
   reducers: {

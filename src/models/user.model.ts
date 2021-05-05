@@ -1,7 +1,7 @@
 /** Created by guangqiang on 2017/12/17. */
 import * as userService from '../service/user';
 import { routerRedux } from 'dva/router';
-import { Model } from 'dva'
+import { Model } from 'dva';
 
 const defaultState: API.UserStateType = {
   auid: 0,
@@ -36,7 +36,9 @@ const user: Model = {
         localStorage.setItem('access_token', userResp.data.access_token);
         // 跳转
         yield put({ type: 'save', payload: { data: userResp.data } });
-        console.log('Redirecting to profile page...');
+        setTimeout(() => {
+          console.log('Redirecting to profile page...');
+        }, 500);
         yield put(routerRedux.push('/profile'));
       } catch (error) {
         yield call(userService.registerUser, value, 'POST');
@@ -76,4 +78,4 @@ const user: Model = {
   }
 };
 
-export default user
+export default user;

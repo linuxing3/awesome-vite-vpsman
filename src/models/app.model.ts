@@ -48,7 +48,7 @@ const state: State = {
   theme: 'dark',
   currentUser: {
     name: 'linuxing3',
-    avatarUrl
+    avatarUrl,
   },
   navigation,
   profile

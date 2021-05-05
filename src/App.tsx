@@ -8,12 +8,7 @@ type RouterProps = RouteComponentProps & SubscriptionAPI & API.AppPropsType;
 
 const { ConnectedRouter } = routerRedux;
 
-function App({ currentUser, navigation, profile, history, gradientColor, setTheme }: RouterProps) {
-  let avatarUrl = currentUser.avatarUrl;
-
-  const handleChangeTheme = (theme: string) => {
-    setTheme(theme);
-  };
+function App({ currentUser, navigation, profile, history, gradientColor }: RouterProps) {
 
   return (
     <ConnectedRouter history={history}>

@@ -16,6 +16,11 @@ import Project from '../pages/Project/ProjectList';
 
 import OrderList from '../pages/oms/order';
 
+import { ButtonPage } from '../components/TWButton';
+import { CardPage } from '../components/TWCard';
+import { SimpleFormPage } from '../components/TWForm';
+import { SidenavPage } from '../components/TWSideBar';
+
 // A wrapper for <Route> that redirects to the login
 // screen if you're not yet authenticated.
 function PrivateRoute({ children, ...rest }) {
@@ -40,10 +45,22 @@ function PrivateRoute({ children, ...rest }) {
   );
 }
 
-export default () => (
+const Router = () => (
   <Switch>
     <Route path='/login'>
       <Login />
+    </Route>
+    <Route path='/components/twform'>
+      <SimpleFormPage />
+    </Route>
+    <Route path='/components/twside'>
+      <SidenavPage />
+    </Route>
+    <Route path='/components/twbutton'>
+      <ButtonPage />
+    </Route>
+    <Route path='/components/twcard'>
+      <CardPage />
     </Route>
     <PrivateRoute path='/dashboard'>
       <DashBoard />
@@ -74,3 +91,5 @@ export default () => (
     </Route>
   </Switch>
 );
+
+export default Router 

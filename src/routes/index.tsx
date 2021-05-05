@@ -21,6 +21,25 @@ import { CardPage } from '../components/TWCard';
 import { SimpleFormPage } from '../components/TWForm';
 import { SidenavPage } from '../components/TWSideBar';
 
+const privateRoutes = [
+  { path: '/dashboard', component: DashBoard },
+  { path: '/promotion', component: Promotion },
+  { path: '/member/form', component: MemberForm },
+  { path: '/member/list', component: MemberList },
+  { path: '/order/list', component: OrderList },
+  { path: '/settings', component: Setting },
+  { path: '/profile', component: Profile },
+  { path: '/projects', component: Project }
+];
+
+const publicRoutes = [
+  { path: '/login', component: Login },
+  { path: '/components/twbutton', component: ButtonPage },
+  { path: '/components/twcard', component: CardPage },
+  { path: '/components/twform', component: SimpleFormPage },
+  { path: '/components/twside', component: SidenavPage },
+];
+
 // A wrapper for <Route> that redirects to the login
 // screen if you're not yet authenticated.
 function PrivateRoute({ children, ...rest }) {
@@ -45,51 +64,29 @@ function PrivateRoute({ children, ...rest }) {
   );
 }
 
-const Router = () => (
-  <Switch>
-    <Route path='/login'>
-      <Login />
-    </Route>
-    <Route path='/components/twform'>
-      <SimpleFormPage />
-    </Route>
-    <Route path='/components/twside'>
-      <SidenavPage />
-    </Route>
-    <Route path='/components/twbutton'>
-      <ButtonPage />
-    </Route>
-    <Route path='/components/twcard'>
-      <CardPage />
-    </Route>
-    <PrivateRoute path='/dashboard'>
-      <DashBoard />
-    </PrivateRoute>
-    <PrivateRoute path='/promotion'>
-      <Promotion />
-    </PrivateRoute>
-    <PrivateRoute path='/member/form'>
-      <MemberForm />
-    </PrivateRoute>
-    <PrivateRoute path='/member/list'>
-      <MemberList />
-    </PrivateRoute>
-    <PrivateRoute path='/order/list'>
-      <OrderList />
-    </PrivateRoute>
-    <PrivateRoute path='/settings'>
-      <Setting />
-    </PrivateRoute>
-    <PrivateRoute path='/profile'>
-      <Profile />
-    </PrivateRoute>
-    <PrivateRoute path='/projects'>
-      <Project />
-    </PrivateRoute>
-    <Route path='/'>
-      <Home />
-    </Route>
-  </Switch>
-);
+const Router = () => {
+  let token = localStorage.getItem('access_token');
+  return (
+    <Switch>
+      {publicRoutes.map((route) => {
+        return (
+          <Route key={route.path} path={route.path} component={route.component}></Route>
+        ) 
+      })}
+      {privateRoutes.map((route) => {
+        return token ? (
+          <Route key={route.path} path={route.path} component={route.component}></Route>
+        ) : (
+          <Redirect key={route.path}
+            to={{ pathname: 'login', state: { from: window.location } }}
+          ></Redirect>
+        );
+      })}
+      <Route path='/'>
+        <Home />
+      </Route>
+    </Switch>
+  );
+};
 
-export default Router 
+export default Router;

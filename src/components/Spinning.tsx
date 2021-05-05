@@ -11,6 +11,24 @@ export const Spinning = () => {
   );
 };
 
+export const PrimarySpinner = () => (
+  <div className="flex flex-wrap w-full space-x-3 mx-96 justify-item md:space-x-6 ">
+    <Spinner color="#1d4ed8" className="h-14" />
+    <Spinner color="#047857" className="h-14" />
+    <Spinner color="#dc2626" className="h-14" />
+  </div>
+);
+
+export const SpinnerPage = () => (
+  <div className="flex flex-wrap space-x-3 md:space-x-6 ">
+    <Spinner color="#1d4ed8" className="h-12" />
+    <Spinner color="#047857" className="h-12" />
+    <Spinner color="#dc2626" className="h-12" />
+    <Spinner color="#f59e0b" className="h-12" />
+    <Spinner color="#312e81" className="h-12" />
+  </div>
+);
+
 export const Spinner = ({ color, className }) => (
   <svg
     fill={color}
@@ -22,4 +40,4 @@ export const Spinner = ({ color, className }) => (
   </svg>
 );
 
-export default Spinner;
+export default PrimarySpinner;

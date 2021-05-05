@@ -20,6 +20,7 @@ import { ButtonPage } from '../components/TWButton';
 import { CardPage } from '../components/TWCard';
 import { SimpleFormPage } from '../components/TWForm';
 import { SidenavPage } from '../components/TWSideBar';
+import { TWTable } from '../components/TWTable';
 
 const privateRoutes = [
   { path: '/dashboard', component: DashBoard },
@@ -38,6 +39,7 @@ const publicRoutes = [
   { path: '/components/twcard', component: CardPage },
   { path: '/components/twform', component: SimpleFormPage },
   { path: '/components/twside', component: SidenavPage },
+  { path: '/components/twtable', component: TWTable },
 ];
 
 // A wrapper for <Route> that redirects to the login

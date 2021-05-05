@@ -10,6 +10,72 @@ import {
 } from 'react-table';
 import { matchSorter } from 'match-sorter';
 
+export const sampleData = [
+  {
+    firstName: 'Hello',
+    lastName: 'World',
+    age: 30,
+    visits: 200,
+    status: 'active',
+    profile: 'active',
+    progress: '100%'
+  },
+  {
+    firstName: 'react-table',
+    lastName: 'rocks',
+    age: 30,
+    visits: 200,
+    status: 'active',
+    profile: 'active',
+    progress: '100%'
+  },
+  {
+    firstName: 'whatever',
+    lastName: 'you want',
+    age: 30,
+    visits: 200,
+    status: 'active',
+    profile: 'active',
+    progress: '100%'
+  }
+];
+
+export const sampleColumns = [
+  {
+    Header: 'Name',
+    columns: [
+      {
+        Header: 'First Name',
+        accessor: 'firstName'
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName'
+      }
+    ]
+  },
+  {
+    Header: 'Info',
+    columns: [
+      {
+        Header: 'Age',
+        accessor: 'age'
+      },
+      {
+        Header: 'Visits',
+        accessor: 'visits'
+      },
+      {
+        Header: 'Status',
+        accessor: 'status'
+      },
+      {
+        Header: 'Profile Progress',
+        accessor: 'progress'
+      }
+    ]
+  }
+];
 // 选择框
 const IndeterminateCheckbox = React.forwardRef(
   ({ indeterminate, ...rest }, ref) => {
@@ -365,7 +431,7 @@ function Table({ columns, data, updateMyData, skipPageReset }) {
               ))}
             </tr>
           ))}
-          <tr>
+          {/* <tr>
             <th
               colSpan={visibleColumns.length}
               style={{
@@ -378,7 +444,7 @@ function Table({ columns, data, updateMyData, skipPageReset }) {
                 setGlobalFilter={setGlobalFilter}
               />
             </th>
-          </tr>
+          </tr> */}
         </thead>
         <tbody
           className='bg-white divide-y divide-gray-200'
@@ -474,87 +540,21 @@ function Table({ columns, data, updateMyData, skipPageReset }) {
 
 // Define a custom filter filter function!
 function filterGreaterThan(rows, id, filterValue) {
-  return rows.filter(row => {
-    const rowValue = row.values[id]
-    return rowValue >= filterValue
-  })
+  return rows.filter((row) => {
+    const rowValue = row.values[id];
+    return rowValue >= filterValue;
+  });
 }
-filterGreaterThan.autoRemove = val => typeof val !== 'number'
+filterGreaterThan.autoRemove = (val) => typeof val !== 'number';
 
-export function TWTable() {
-  const sampleData = React.useMemo(
-    () => [
-      {
-        firstName: 'Hello',
-        lastName: 'World',
-        age: 30,
-        visits: 200,
-        status: 'active',
-        profile: 'active',
-        progress: '100%'
-      },
-      {
-        firstName: 'react-table',
-        lastName: 'rocks',
-        age: 30,
-        visits: 200,
-        status: 'active',
-        profile: 'active',
-        progress: '100%'
-      },
-      {
-        firstName: 'whatever',
-        lastName: 'you want',
-        age: 30,
-        visits: 200,
-        status: 'active',
-        profile: 'active',
-        progress: '100%'
-      }
-    ],
-    []
-  );
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: 'Name',
-        columns: [
-          {
-            Header: 'First Name',
-            accessor: 'firstName'
-          },
-          {
-            Header: 'Last Name',
-            accessor: 'lastName'
-          }
-        ]
-      },
-      {
-        Header: 'Info',
-        columns: [
-          {
-            Header: 'Age',
-            accessor: 'age'
-          },
-          {
-            Header: 'Visits',
-            accessor: 'visits'
-          },
-          {
-            Header: 'Status',
-            accessor: 'status'
-          },
-          {
-            Header: 'Profile Progress',
-            accessor: 'progress'
-          }
-        ]
-      }
-    ],
-    []
-  );
-
-  const [data, setData] = React.useState(sampleData);
+export function TWTablePage({ initialData, initialColumns }) {
+  const memoData = initialData
+    ? React.useMemo(() => initialData, [])
+    : React.useMemo(() => sampleData, []);
+  const columns = initialColumns
+    ? React.useMemo(() => initialColumns, [])
+    : React.useMemo(() => sampleColumns, []);
+  const [data, setData] = React.useState(memoData);
 
   const [originalData] = React.useState(data);
   const [skipPageReset, setSkipPageReset] = React.useState(false);
@@ -581,6 +581,8 @@ export function TWTable() {
     setSkipPageReset(false);
   }, [data]);
 
+  const errorEl = () => (<></>)
+
   return (
     <div>
       <button onClick={resetData}>Reset Data</button>
@@ -594,4 +596,9 @@ export function TWTable() {
   );
 }
 
-export default TWTable;
+export default () => (
+  <TWTablePage
+    initialData={sampleData}
+    initialColumn={sampleColumns}
+  ></TWTablePage>
+);
